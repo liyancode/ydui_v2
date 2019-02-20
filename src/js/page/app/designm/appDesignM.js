@@ -7,21 +7,24 @@ const {Content,} = Layout;
 const TabPane = Tabs.TabPane;
 const PageContent = (props) => {
     return <Tabs defaultActiveKey={"a"} onChange="" onTabClick="">
-        <TabPane tab="我的客户" key={"a"}>
-            我的客户列表(开发中...)
+        <TabPane tab="风管品种设计" key={"a"}>
+            (开发中...)
         </TabPane>
-        <TabPane tab="所有客户" key={"s"}>
-            所有客户列表(开发中...)
+        <TabPane tab="风管设计规范" key={"b"}>
+            (开发中...)
+        </TabPane>
+        <TabPane tab="风管安装规范" key={"c"}>
+            (开发中...)
         </TabPane>
     </Tabs>
 }
 
-export default class AppCRM extends React.Component {
+export default class AppDesignM extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
-            breadcrumb: '客户关系',
+            breadcrumb: '设计管理',
         }
     }
 

@@ -43,22 +43,46 @@ export default class CompSider extends React.Component {
                                 <span>人力资源</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="appCRM">
-                            <Link to='/appCRM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="contacts"/>
-                                <span>客户关系</span>
+                        <Menu.Item key="appMarketM">
+                            <Link to='/appMarketM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="global" />
+                                <span>销售管理</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="appOrder">
-                            <Link to='/appOrder/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="shopping-cart"/>
-                                <span>订单管理</span>
+                        <Menu.Item key="appDesignM">
+                            <Link to='/appDesignM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="experiment" />
+                                <span>设计管理</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="appPurchaseM">
+                            <Link to='/appPurchaseM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="shopping" />
+                                <span>采购管理</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="appWarehouse">
                             <Link to='/appWarehouse/' replace onClick={this.props.siderLinkClick}>
                                 <Icon type="database"/>
-                                <span>仓储管理</span>
+                                <span>仓库管理</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="appProduceM">
+                            <Link to='/appProduceM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="fire" />
+                                <span>生产管理</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="appFinanceM">
+                            <Link to='/appFinanceM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="property-safety" />
+                                <span>财务管理</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="appSystemM">
+                            <Link to='/appSystemM/' replace onClick={this.props.siderLinkClick}>
+                                <Icon type="setting" />
+                                <span>系统管理</span>
                             </Link>
                         </Menu.Item>
                     </Menu>

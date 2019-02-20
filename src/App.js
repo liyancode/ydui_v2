@@ -12,6 +12,12 @@ import {PrivateRoute} from "./PrivateRoute";
 import AppHome from "./js/page/app/home/appHome"
 import AppHR from "./js/page/app/hr/appHR"
 import AppCRM from "./js/page/app/crm/appCRM"
+import AppDesignM from "./js/page/app/designm/appDesignM"
+import AppFinanceM from "./js/page/app/financem/appFinanceM"
+import AppMarketM from "./js/page/app/marketm/appMarketM"
+import AppProduceM from "./js/page/app/producem/appProduceM"
+import AppPurchaseM from "./js/page/app/purchasem/appPurchaseM"
+import AppSystemM from "./js/page/app/systemm/appSystemM"
 import AppOrder from "./js/page/app/order/appOrder"
 import AppWarehouse from "./js/page/app/warehouse/appWarehouse"
 
@@ -63,8 +69,12 @@ export default class AppRouter extends React.Component {
                                 <PrivateRoute path="/" exact component={AppHome}/>
                                 <PrivateRoute path="/home/" component={AppHome}/>
                                 <PrivateRoute path="/appHR/" component={AppHR}/>
-                                <PrivateRoute path="/appCRM/" component={AppCRM}/>
-                                <PrivateRoute path="/appOrder/" component={AppOrder}/>
+                                <PrivateRoute path="/appDesignM/" component={AppDesignM}/>
+                                <PrivateRoute path="/appFinanceM/" component={AppFinanceM}/>
+                                <PrivateRoute path="/appMarketM/" component={AppMarketM}/>
+                                <PrivateRoute path="/appProduceM/" component={AppProduceM}/>
+                                <PrivateRoute path="/appPurchaseM/" component={AppPurchaseM}/>
+                                <PrivateRoute path="/appSystemM/" component={AppSystemM}/>
                                 <PrivateRoute path="/appWarehouse/" component={AppWarehouse}/>
                                 <Route path="/notLogin" component={CompNotLogin}/>
                                 <Route component={P404}/>
