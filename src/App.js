@@ -47,7 +47,7 @@ export default class AppRouter extends React.Component {
 
     render() {
         if(window.location.pathname.indexOf('/login')===0){
-            return <LoginPage/>
+            return (<Router><LoginPage/></Router>)
         }else{
             return (<Router>
                 <Layout style={{minHeight:"100%"}}>
