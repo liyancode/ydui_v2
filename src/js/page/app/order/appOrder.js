@@ -21,7 +21,7 @@ export default class AppOrder extends React.Component {
                 </Breadcrumb>
                 <Content style={_globalConstrants._styles.contentStyle}
                 >
-                    Order
+                    订单信息（开发中...）
                 </Content>
             </div>)
     }

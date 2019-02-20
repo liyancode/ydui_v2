@@ -319,10 +319,12 @@ export default class AppWarehouse extends React.Component {
         this.handleReloadBtnOnclick = this.handleReloadBtnOnclick.bind(this);
 
         serviceWarehouse.getWHOutRecordAll().then(data => {
-            this.setState({
-                loading: false,
-                wh_out_records: data["wh_out_records"]
-            });
+            if(data){
+                this.setState({
+                    loading: false,
+                    wh_out_records: data["wh_out_records"]
+                });
+            }
         })
     }
 
@@ -333,10 +335,12 @@ export default class AppWarehouse extends React.Component {
         switch (sub) {
             case subConstrants.outManagement:
                 serviceWarehouse.getWHOutRecordAll().then(data => {
-                    this.setState({
-                        loading: false,
-                        wh_out_records: data["wh_out_records"]
-                    });
+                    if(data){
+                        this.setState({
+                            loading: false,
+                            wh_out_records: data["wh_out_records"]
+                        });
+                    }
                 })
                 break
             default:

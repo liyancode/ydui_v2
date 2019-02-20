@@ -185,7 +185,7 @@ const PageContent = (props) => {
                 <Table rowKey="application_id" columns={applicationsTableColumns}
                        dataSource={props.userApplications} size="small"/>
             </TabPane>
-            <TabPane tab="部门信息" key={subConstrants.hrDepartment}>Content of Tab Pane 3</TabPane>
+            <TabPane tab="部门信息" key={subConstrants.hrDepartment}>部门信息(开发中...)</TabPane>
         </Tabs>)
 }
 

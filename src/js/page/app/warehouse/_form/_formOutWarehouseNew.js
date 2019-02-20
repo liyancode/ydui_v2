@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Select, Popconfirm, Spin, Button} from 'antd';
+import {Form, Input, Select, Popconfirm, Icon, Button, Card} from 'antd';
 import {_WH_Config} from '../_wh_config';
 
 const FormItem = Form.Item;
@@ -15,6 +15,20 @@ class _formOutWarehouseNew extends React.Component {
             loading: false,
             confirmDirty: false,
             autoCompleteResult: [],
+            items:[
+                {
+                    num:1,
+                    name:"春秋丁",
+                    specific:"320cm",
+                    packingCount:5,
+                    packingCountUnit:'kg',
+                    aCount:1,
+                    aCountUnit:'juan',
+                    comment:"ddd",
+                    unitPrice:22,
+                    totalPrice:110
+                }
+                ]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
@@ -110,8 +124,8 @@ class _formOutWarehouseNew extends React.Component {
                     offset: 0,
                 },
                 sm: {
-                    span: 16,
-                    offset: 8,
+                    span: 14,
+                    offset: 10,
                 },
             },
         };
@@ -151,139 +165,179 @@ class _formOutWarehouseNew extends React.Component {
         const styleInline = {
             display: "inline"
         }
+
+        let items=[]
+        for(let i=0;i<this.state.items.length;i++){
+            let itemI=this.state.items[i]
+
+            items.push(
+                <tr>
+                    <td colSpan={1}>{itemI.num}</td>
+                    <td colSpan={4}>{itemI.name}</td>
+                    <td colSpan={4}>{itemI.specific}</td>
+                    <td colSpan={2}>{itemI.packingCount}</td>
+                    <td colSpan={1}>{itemI.packingCountUnit}</td>
+                    <td colSpan={2}>{itemI.aCount}</td>
+                    <td colSpan={1}>{itemI.aCountUnit}</td>
+                    <td colSpan={3}>{itemI.unitPrice}</td>
+                    <td colSpan={2}>{itemI.unitPrice*itemI.packingCount}</td>
+                    <td colSpan={4}>{itemI.comment}</td>
+                </tr>
+            )
+        }
         return (
             <div>
-                <div className="col-sm-10 col-sm-offset-1">
-                    <h4 style={styleInline}><img src={"/images/yd_logo_form.png"} style={{height: 50}}/>江苏耀迪新材料有限公司
-                        - 出库单</h4>
-                    {/*<img src={"/images/sample_bc.gif"} style={{height: 30,paddingLeft:10}}/>*/}
-                </div>
-                <Form onSubmit={this.handleSubmit} style={{maxWidth: '800px'}}>
-                    <FormItem
-                        {...formItemLayout}
-                        label="收货单位"
-                    >
-                        {getFieldDecorator('name1', {
-                            rules: [{
-                                required: true, message: '请输入收货单位!',
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="规格"
-                    >
-                        {getFieldDecorator('specification', {
-                            rules: [{
-                                required: true, message: '请输入规格!',
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="单价(元)"
-                    >
-                        {getFieldDecorator('unit_price', {
-                            rules: [{
-                                required: false, message: '请输入单价!',
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="库存数"
-                    >
-                        {getFieldDecorator('count', {
-                            rules: [{
-                                required: true, message: '请输入库存数!',
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="库存单位"
-                    >
-                        {countUnitSelector}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="辅助计数"
-                    >
-                        {getFieldDecorator('auxiliary_count', {
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="辅助计数单位"
-                    >
-                        {auxiliaryCountUnitSelector}
-                    </FormItem>
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="详细描述"
-                    >
-                        {getFieldDecorator('description', {
-                            rules: [],
-                        })(
-                            <TextArea rows={3}/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="负责人"
-                    >
-                        {getFieldDecorator('principal', {
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="原料仓库"
-                    >
-                        {whLocationSelector}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="仓库内部位置"
-                    >
-                        {getFieldDecorator('wh_inner_location', {
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="备注说明"
-                    >
-                        {getFieldDecorator('comment', {
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input/>
-                        )}
-                    </FormItem>
+                <Form onSubmit={this.handleSubmit}>
+                    <Card style={{background: "rgb(236, 236, 236)", overflow: "scroll"}}>
+                        <table id="wh_out_record_form_table">
+                            <thead>
+                            <tr>
+                                <td rowSpan={2} colSpan={18} style={{textAlign: "center"}}><h4 style={styleInline}><img
+                                    src={"/images/yd_logo_form.png"} style={{height: 50}}/>江苏耀迪新材料有限公司
+                                    - 出库单</h4></td>
+                                <td rowSpan={2} colSpan={6} style={{color: "green"}}>[单号条形码 提交生成]</td>
+                            </tr>
+                            <tr></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colSpan={2}>收货单位</td>
+                                <td colSpan={10}>
+                                    <FormItem>
+                                        {getFieldDecorator('age', {initialValue: 29})(
+                                            <Input min={1} max={100}/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>订单编号</td>
+                                <td colSpan={6}>
+                                    <FormItem>
+                                        {getFieldDecorator('age', {initialValue: 29})(
+                                            <Input min={1} max={100}/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={4}></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>收货地址</td>
+                                <td colSpan={10}>
+                                    <FormItem>
+                                        {getFieldDecorator('age', {initialValue: 29})(
+                                            <Input min={1} max={100}/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>收货电话</td>
+                                <td colSpan={4}>
+                                    <FormItem>
+                                        {getFieldDecorator('age', {initialValue: 29})(
+                                            <Input min={1} max={100}/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>发货日期</td>
+                                <td colSpan={4}>2019年02月19日</td>
+                            </tr>
+                            <tr>
+                                <td colSpan={1}>序号</td>
+                                <td colSpan={4}>品名</td>
+                                <td colSpan={4}>产品规格</td>
+                                <td colSpan={2}>包装规格</td>
+                                <td colSpan={1}>单位</td>
+                                <td colSpan={2}>数量</td>
+                                <td colSpan={1}>单位</td>
+                                <td colSpan={3}>单价</td>
+                                <td colSpan={2}>金额</td>
+                                <td colSpan={4}>备注</td>
+                            </tr>
+                            {items}
+                            <tr>
+                                <td colSpan={1}>
+                                    <Button type="primary" style={{}} onClick="">
+                                        <Icon type="plus"/>
+                                    </Button>
+                                </td>
+                                <td colSpan={4}></td>
+                                <td colSpan={4}></td>
+                                <td colSpan={2}></td>
+                                <td colSpan={1}></td>
+                                <td colSpan={2}></td>
+                                <td colSpan={1}></td>
+                                <td colSpan={3}></td>
+                                <td colSpan={2}></td>
+                                <td colSpan={4}></td>
+                            </tr>
+                            {/*<tr>*/}
+                                {/*<td colSpan={1}></td>*/}
+                                {/*<td colSpan={4}></td>*/}
+                                {/*<td colSpan={4}></td>*/}
+                                {/*<td colSpan={2}></td>*/}
+                                {/*<td colSpan={1}></td>*/}
+                                {/*<td colSpan={2}></td>*/}
+                                {/*<td colSpan={1}></td>*/}
+                                {/*<td colSpan={3}></td>*/}
+                                {/*<td colSpan={2}></td>*/}
+                                {/*<td colSpan={4}></td>*/}
+                            {/*</tr>*/}
+                            <tr>
+                                <td colSpan={1}>总计</td>
+                                <td colSpan={11}></td>
+                                <td colSpan={2}></td>
+                                <td colSpan={1}></td>
+                                <td colSpan={3}>总计</td>
+                                <td colSpan={2}></td>
+                                <td colSpan={4}></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={4}>说明</td>
+                                <td colSpan={20} style={{color: "red"}}>
+                                    <p>备注：本出库与合同具有同等效力。</p>
+                                    <p>1.收货后请及时检查，如有质量问题请7天内书面通知，协商解决。一经加工，恕我司一概不负责。</p>
+                                    <p>2.本出库单经收货单位工作人员或其委托的人员签收即生效，谢谢合作！</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>业务员</td>
+                                <td colSpan={4}>
+                                    <FormItem>
+                                        {getFieldDecorator('salesman',
+                                            {})(
+                                            <Input/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>制单人</td>
+                                <td colSpan={4}>
+                                    <FormItem>
+                                        {getFieldDecorator('created_by',
+                                            {})(
+                                            <Input/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>送货人</td>
+                                <td colSpan={4}>
+                                    <FormItem>
+                                        {getFieldDecorator('delivery_by',
+                                            {})(
+                                            <Input/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                                <td colSpan={2}>收货人</td>
+                                <td colSpan={4}>
+                                    <FormItem>
+                                        {getFieldDecorator('ship_to_user',
+                                            {})(
+                                            <Input/>
+                                        )}
+                                    </FormItem>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </Card>
                     <FormItem {...tailFormItemLayout}>
                         <Popconfirm title="确认提交？" onConfirm={this.handleSubmit}
                                     okText="是" cancelText="否">

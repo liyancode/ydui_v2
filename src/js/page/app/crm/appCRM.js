@@ -1,9 +1,10 @@
 import React from 'react';
-import {Layout, Breadcrumb,} from 'antd';
+import {Layout, Breadcrumb,Tabs} from 'antd';
 import _globalConstrants from "../../../util/_globalConstrants"
 
 const {Content,} = Layout;
 
+const TabPane = Tabs.TabPane;
 export default class AppCRM extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +22,14 @@ export default class AppCRM extends React.Component {
                 </Breadcrumb>
                 <Content style={_globalConstrants._styles.contentStyle}
                 >
-                    CRM
+                    <Tabs defaultActiveKey={"a"} onChange="" onTabClick="">
+                        <TabPane tab="我的客户" key={"a"}>
+                            我的客户列表(开发中...)
+                        </TabPane>
+                        <TabPane tab="所有客户" key={"s"}>
+                            所有客户列表(开发中...)
+                        </TabPane>
+                    </Tabs>
                 </Content>
             </div>)
     }
