@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Breadcrumb, Button, Tag, Tabs, Icon, Modal, Spin, Table} from 'antd';
+import {Layout, Breadcrumb, Button, Tag, Tabs, Icon, Radio, Spin, Table} from 'antd';
 import _globalConstrants from "../../../util/_globalConstrants"
 import _globalUtil from "../../../util/_globalUtil";
 import {serviceWarehouse} from "../../../service/serviceWarehouse";
@@ -8,7 +8,7 @@ import WrappedFormOutWarehouseNew from "./_form/_formOutWarehouseNew"
 
 const {Content,} = Layout;
 const TabPane = Tabs.TabPane;
-
+const RadioGroup = Radio.Group;
 const subConstrants = {
     overView: "overView",
     outManagement: "outManagement",
@@ -21,6 +21,22 @@ const childConstrants = {
     viewDetail: 'viewDetail',
     create: 'create',
     edit: 'edit',
+}
+
+function whLocationMap(whLocation) {
+    let tg;
+    switch (whLocation) {
+        case 'yaodi':
+            tg = <Tag color="#2db7f5">耀迪仓库</Tag>
+            break;
+        case 'other':
+            tg = <Tag color="#87d068">其他仓库</Tag>
+            break;
+        default:
+            tg = <Tag>未知<Icon type="minus-circle-o"/></Tag>
+            break;
+    }
+    return <span>{tg}</span>
 }
 
 const PageContent = (props) => {
@@ -64,7 +80,8 @@ const PageContent = (props) => {
             key: 'wh_out_record_status',
             sorter: (a, b) => a.wh_out_record_status - b.wh_out_record_status ? 1 : -1,
             render: (text, record) => {
-                return <Tag><span><Icon type="tag" /> {_WH_Config._wh_record_out_status(record.wh_out_record_status)}</span></Tag>
+                return <Tag><span><Icon
+                    type="tag"/> {_WH_Config._wh_record_out_status(record.wh_out_record_status)}</span></Tag>
             },
         },
         {
@@ -126,6 +143,92 @@ const PageContent = (props) => {
             },
         }]
 
+    const wh_inventory_table_columns = [
+        {
+            title: '编号',
+            dataIndex: 'wh_inventory_id',
+            key: 'wh_inventory_id',
+            sorter: (a, b) => a.wh_inventory_id - b.wh_inventory_id ? 1 : -1,
+        },
+        {
+            title: '类别',
+            dataIndex: 'wh_inventory_type',
+            key: 'wh_inventory_type',
+            sorter: (a, b) => a.wh_inventory_type - b.wh_inventory_type ? 1 : -1,
+            render: (text, record) => {
+                return _WH_Config._en_to_cn(props.inventoryManagementRatioValue)
+            },
+        },
+        {
+            title: '名称',
+            dataIndex: 'name',
+            key: 'name',
+            sorter: (a, b) => a.name > b.name ? 1 : -1,
+        },
+        {
+            title: '规格',
+            dataIndex: 'specification',
+            key: 'specification',
+            sorter: (a, b) => a.specification > b.specification ? 1 : -1,
+        },
+        // {
+        //     title: '单价',
+        //     dataIndex: 'unit_price',
+        //     key: 'unit_price',
+        //     sorter: (a, b) => a.unit_price > b.unit_price ? 1 : -1,
+        //     render: (text, record) => {
+        //         return eNumber(record.unit_price) + "元"
+        //     },
+        // },
+        {
+            title: '库存剩余',
+            dataIndex: 'count',
+            key: 'count',
+            sorter: (a, b) => new Number(a.count) > new Number(b.count) ? 1 : -1,
+            render: (text, record) => {
+                return _WH_Config._format_number(record.count) + " " + _WH_Config._en_to_cn(record.count_unit)
+            },
+        },
+        {
+            title: '辅助计数',
+            dataIndex: 'auxiliary_count',
+            key: 'auxiliary_count',
+            sorter: (a, b) => new Number(a.auxiliary_count) > new Number(b.auxiliary_count) ? 1 : -1,
+            render: (text, record) => {
+                return _WH_Config._format_number(record.auxiliary_count) + " " + _WH_Config._en_to_cn(record.auxiliary_count_unit)
+            },
+        },
+        {
+            title: '管理员',
+            dataIndex: 'principal',
+            key: 'principal',
+        },
+        {
+            title: '所在仓库',
+            key: 'wh_location',
+            sorter: (a, b) => a.followup_status > b.followup_status ? 1 : -1,
+            render: (text, record) => {
+                return whLocationMap(record.wh_location)
+            },
+        }, {
+            title: '最近变更时间',
+            dataIndex: 'last_update_at',
+            key: 'last_update_at',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.last_update_at > b.last_update_at ? 1 : -1,
+            render: (text, record) => {
+                return (record.last_update_at.split('+')[0])
+            },
+        }, {
+            title: '操作',
+            key: 'action',
+            render: (text, record) => {
+                return (<span>
+                        <a href="javascript:;" onClick={props.handleCheckDetailOnclick}
+                           wh_inventory_id={record.wh_inventory_id} record_type="wh_inventory">查看详情</a>
+                        </span>)
+            },
+        }];
     let tabOverView, tabOutManagement, tabInManagement, tabInventoryManagement;
     switch (props.sub) {
         case subConstrants.overView:
@@ -240,7 +343,21 @@ const PageContent = (props) => {
                             <Button style={btnStyle} type="primary" icon="plus"
                                     myattr={subConstrants.inventoryManagement}
                                     onClick={props.createButtonClick}>新建库存<Icon type="build"/></Button>
-                            all
+                            <hr/>
+                            <div>
+                                <RadioGroup onChange={props.onChangeInventoryManagementRadio}
+                                            value={props.inventoryManagementRatioValue}>
+                                    <Radio value={'yuanliao'}><Tag>原料</Tag></Radio>
+                                    <Radio value={'peibu'}><Tag>胚布</Tag></Radio>
+                                    <Radio value={'chengpin'}><Tag>成品</Tag></Radio>
+                                    <Radio value={'zhuji'}><Tag>助剂</Tag></Radio>
+                                    <Radio value={'fuliao'}><Tag>辅料</Tag></Radio>
+                                </RadioGroup>
+                            </div>
+                            <Spin spinning={props.loading}>
+                                <Table rowKey="id" columns={wh_inventory_table_columns}
+                                       dataSource={props.inventoryManagementList} size="small" bordered/>
+                            </Spin>
                         </div>
                     break
                 case childConstrants.viewDetail:
@@ -283,7 +400,7 @@ const PageContent = (props) => {
     return (
         <Tabs defaultActiveKey={props.sub} onChange={props.tabChange} onTabClick={props.tabClick}>
             {/*<TabPane tab="总览" key={subConstrants.overView}>*/}
-                {/*{tabOverView}*/}
+            {/*{tabOverView}*/}
             {/*</TabPane>*/}
             <TabPane tab="出库记录" key={subConstrants.outManagement}>
                 {tabOutManagement}
@@ -305,6 +422,8 @@ export default class AppWarehouse extends React.Component {
             breadcrumb: '仓储管理',
             sub: _sub ? _sub : subConstrants.outManagement,
             child: childConstrants.all,
+            inventoryManagementRatioValue: "yuanliao",
+            inventoryManagementList: [],
             wh_out_records: []
         }
 
@@ -317,9 +436,11 @@ export default class AppWarehouse extends React.Component {
         this.handleBackButtonClickFromEdit = this.handleBackButtonClickFromEdit.bind(this);
         this.handleCheckDetailOnclick = this.handleCheckDetailOnclick.bind(this);
         this.handleReloadBtnOnclick = this.handleReloadBtnOnclick.bind(this);
+        this.onChangeInventoryManagementRadio = this.onChangeInventoryManagementRadio.bind(this);
+
 
         serviceWarehouse.getWHOutRecordAll().then(data => {
-            if(data){
+            if (data) {
                 this.setState({
                     loading: false,
                     wh_out_records: data["wh_out_records"]
@@ -335,13 +456,22 @@ export default class AppWarehouse extends React.Component {
         switch (sub) {
             case subConstrants.outManagement:
                 serviceWarehouse.getWHOutRecordAll().then(data => {
-                    if(data){
+                    if (data) {
                         this.setState({
                             loading: false,
                             wh_out_records: data["wh_out_records"]
                         });
                     }
                 })
+                break
+            case subConstrants.inventoryManagement:
+                serviceWarehouse.getWHInventoryListByInventoryType("yuanliao").then(data => {
+                    this.setState({
+                        inventoryManagementList: data,
+                        inventoryManagementRatioValue:"yuanliao",
+                        loading: false
+                    });
+                });
                 break
             default:
                 this.setState({
@@ -412,14 +542,27 @@ export default class AppWarehouse extends React.Component {
     }
 
     handleCheckDetailOnclick(e) {
-        const attrs=e.target.attributes
-        const record_type=attrs.record_type.value
+        const attrs = e.target.attributes
+        const record_type = attrs.record_type.value
         console.log(record_type)
     }
 
-    handleReloadBtnOnclick(e){
+    handleReloadBtnOnclick(e) {
         console.log(e.target.attributes.myattr.value)
         this.updateSubData(e.target.attributes.myattr.value)
+    }
+
+    onChangeInventoryManagementRadio(e) {
+        let value = e.target.value
+        this.setState({loading: true});
+
+        serviceWarehouse.getWHInventoryListByInventoryType(value).then(data => {
+            this.setState({
+                inventoryManagementList: data,
+                inventoryManagementRatioValue:value,
+                loading: false
+            });
+        });
     }
 
     render() {
@@ -435,6 +578,8 @@ export default class AppWarehouse extends React.Component {
                         sub={this.state.sub}
                         child={this.state.child}
                         wh_out_records={this.state.wh_out_records}
+                        inventoryManagementRatioValue={this.state.inventoryManagementRatioValue}
+                        inventoryManagementList={this.state.inventoryManagementList}
                         tabClick={this.handleTabClick}
                         tabChange={this.handleTabChange}
                         createButtonClick={this.handleCreateButtonClick}
@@ -443,6 +588,7 @@ export default class AppWarehouse extends React.Component {
                         backButtonClickFromCreate={this.handleBackButtonClickFromCreate}
                         backButtonClickFromEdit={this.handleBackButtonClickFromEdit}
                         handleCheckDetailOnclick={this.handleCheckDetailOnclick}
+                        onChangeInventoryManagementRadio={this.onChangeInventoryManagementRadio}
                     />
                 </Content>
             </div>)

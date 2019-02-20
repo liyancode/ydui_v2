@@ -30,10 +30,10 @@ function _measure_unit_options() {
 function _inventory_type_options() {
     return [
         <Option value="yuanliao"key="yuanliao">原料</Option>,
-        <Option value="peibu"key="yuanliao">胚布</Option>,
-        <Option value="chengpin"key="yuanliao">成品</Option>,
-        <Option value="zhuji"key="yuanliao">助剂</Option>,
-        <Option value="fuliao"key="yuanliao">辅料</Option>,
+        <Option value="peibu"key="peibu">胚布</Option>,
+        <Option value="chengpin"key="chengpin">成品</Option>,
+        <Option value="zhuji"key="zhuji">助剂</Option>,
+        <Option value="fuliao"key="fuliao">辅料</Option>,
     ]
 }
 
@@ -46,9 +46,9 @@ function _en_to_cn(enWord){
         case "update":
             return "更新"
         case "yuanliao":
-            return "更新"
+            return "原料"
         case "peibu":
-            return "更新"
+            return "胚布"
         case "chengpin":
             return "成品"
         case "zhuji":
