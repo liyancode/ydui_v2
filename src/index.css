@@ -13,7 +13,59 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.module_button_icon{
+    font-size: 36px !important;
+}
+.module_button_text{
+    display:block !important;
+    marginLeft:0px !important;
+}
+@font-face {
+    font-family: 'iconfont';
+    src: url('./css/fonts/iconfont.eot');
+    src: url('./css/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('./css/fonts/iconfont.woff2') format('woff2'),
+    url('./css/fonts/iconfont.woff') format('woff'),
+    url('./css/fonts/iconfont.ttf') format('truetype'),
+    url('./css/fonts/iconfont.svg#iconfont') format('svg');
+}
 
+.iconfont {
+    font-family: "iconfont" !important;
+    /*font-size: 16px;*/
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: 'iconfont_marketM';
+    src: url('./css/fonts/marketM/iconfont.eot');
+    src: url('./css/fonts/marketM/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('./css/fonts/marketM/iconfont.woff2') format('woff2'),
+    url('./css/fonts/marketM/iconfont.woff') format('woff'),
+    url('./css/fonts/marketM/iconfont.ttf') format('truetype'),
+    url('./css/fonts/marketM/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont_marketM {
+    font-family: "iconfont_marketM" !important;
+    /*font-size: 16px;*/
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*.iconfont {*/
+    /*width: 1em; height: 1em;*/
+    /*vertical-align: -0.15em;*/
+    /*fill: currentColor;*/
+    /*overflow: hidden;*/
+/*}*/
+.btn_backTOLanding{
+    margin-right: 8px;
+    margin-bottom: 12px;
+}
 #root {
     height: 100%;
 }

@@ -2,7 +2,71 @@ const _globalConstrants = {
     _styles:{
         contentStyle:{
             background: '#fff', padding: 24, margin: 0, minHeight: 720
-        }
+        },
+        styleFLogo:{
+            display:"inline-block",
+            minWidth:88,
+            height:88,
+            textAlign:"center",
+            verticalAlign:"middle",
+            backgroundColor:"#fff",
+            border:"1px solid #d9d9d9",
+            borderRadius:"4px",
+            outline:0,
+            cursor:"pointer",
+            padding:8,
+            margin:8
+        },
+    },
+    _pages:{
+        apps:{
+            appMarketM:{
+                crm:{
+                    en:"crm",
+                    cn:"客户信息",
+                },
+                order:{
+                    en:"order",
+                    cn:"订单管理",
+                },
+                approvePrice:{
+                    en:"approvePrice",
+                    cn:"定价审批",
+                },
+                approveDeliveryDate:{
+                    en:"approveDeliveryDate",
+                    cn:"交期审批",
+                },
+                approvePurchaseRequest:{
+                    en:"approvePurchaseRequest",
+                    cn:"采购审批",
+                },
+                approvePrepareGoods:{
+                    en:"approvePrepareGoods",
+                    cn:"备货审批",
+                },
+                reconciliation:{
+                    en:"reconciliation",
+                    cn:"销售对账",
+                },
+                saleStats:{
+                    en:"saleStats",
+                    cn:"销售统计",
+                },
+                returnGoods:{
+                    en:"returnGoods",
+                    cn:"退货信息",
+                }
+            }
+        },
+        landingPage:"landing",
+        childPages:{
+            all:'all',
+            viewDetail:'viewDetail',
+            createNew:"createNew",
+            edit:"edit"
+        },
+        errorPage:"出错了，未知页面！"
     }
 }
 
