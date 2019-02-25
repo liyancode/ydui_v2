@@ -11,15 +11,13 @@ import CompNotLogin from "./js/page/component/compNotLogin"
 import {PrivateRoute} from "./PrivateRoute";
 import AppHome from "./js/page/app/home/appHome"
 import AppHR from "./js/page/app/hr/appHR"
-import AppCRM from "./js/page/app/crm/appCRM"
 import AppDesignM from "./js/page/app/designm/appDesignM"
 import AppFinanceM from "./js/page/app/financem/appFinanceM"
 import AppMarketM from "./js/page/app/marketm/appMarketM"
 import AppProduceM from "./js/page/app/producem/appProduceM"
 import AppPurchaseM from "./js/page/app/purchasem/appPurchaseM"
 import AppSystemM from "./js/page/app/systemm/appSystemM"
-import AppOrder from "./js/page/app/order/appOrder"
-import AppWarehouse from "./js/page/app/warehouse/appWarehouse"
+import AppWarehouseM from "./js/page/app/warehouse/appWarehouseM"
 
 const P404 = () => <h2>404</h2>;
 const NotLogin = () => <div>
@@ -52,6 +50,8 @@ export default class AppRouter extends React.Component {
     }
 
     render() {
+        let defaultSelectedKeys=[_globalUtil._pathnameToMenukey()]
+        console.log(defaultSelectedKeys)
         if(window.location.pathname.indexOf('/login')===0){
             return (<Router><LoginPage/></Router>)
         }else{
@@ -61,7 +61,7 @@ export default class AppRouter extends React.Component {
                     <Layout style={{marginTop:64}}>
                         <CompSider
                             collapsed={this.state.collapsed}
-                            defaultMenuKey={[_globalUtil._pathnameToMenukey()]}
+                            defaultMenuKey={defaultSelectedKeys}
                             siderLinkClick={handleSiderLinkClick}
                         />
                         <Layout style={{ padding: '0 24px 24px' }}>
@@ -75,7 +75,7 @@ export default class AppRouter extends React.Component {
                                 <PrivateRoute path="/appProduceM/" component={AppProduceM}/>
                                 <PrivateRoute path="/appPurchaseM/" component={AppPurchaseM}/>
                                 <PrivateRoute path="/appSystemM/" component={AppSystemM}/>
-                                <PrivateRoute path="/appWarehouse/" component={AppWarehouse}/>
+                                <PrivateRoute path="/appWarehouseM/" component={AppWarehouseM}/>
                                 <Route path="/notLogin" component={CompNotLogin}/>
                                 <Route component={P404}/>
                             </Switch>
