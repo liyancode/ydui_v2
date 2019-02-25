@@ -6,29 +6,7 @@ const {Content,} = Layout;
 
 const TabPane = Tabs.TabPane;
 const PageContent = (props) => {
-    return <Tabs defaultActiveKey={"a"} onChange="" onTabClick="">
-        <TabPane tab="审批管理" key={"a"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="销售账务" key={"b"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="采购账务" key={"c"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="发票管理" key={"d"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="利润统计" key={"e"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="成本核算" key={"f"}>
-            (开发中...)
-        </TabPane>
-        <TabPane tab="其他" key={"g"}>
-            (开发中...)
-        </TabPane>
-    </Tabs>
+    return "开发中"
 }
 
 export default class AppFinanceM extends React.Component {

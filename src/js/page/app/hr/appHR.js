@@ -279,6 +279,7 @@ export default class AppHR extends React.Component {
         this.state = {
             userName: userName,
             loading: true,
+            breadcrumbLanding:"人力资源",
             breadcrumb: '人力资源',
             sub: _sub ? _sub : subConstrants.hrMy,
             userInfo: {},
@@ -343,9 +344,16 @@ export default class AppHR extends React.Component {
     render() {
         return (
             <div>
-                <Breadcrumb style={{margin: '16px 0'}}>
-                    <Breadcrumb.Item>{this.state.breadcrumb}</Breadcrumb.Item>
-                </Breadcrumb>
+                <div className="page-header">
+                    <h4 style={{display: "inline"}}>
+                        <Icon type="user" />
+                        <span>{this.state.breadcrumbLanding}</span>
+                    </h4>
+                    <Breadcrumb style={{display: "inline"}}>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                        <Breadcrumb.Item>{this.state.breadcrumb}</Breadcrumb.Item>
+                    </Breadcrumb>
+                </div>
                 <Content style={_globalConstrants._styles.contentStyle}
                 >
                     <PageContent loading={this.state.loading}

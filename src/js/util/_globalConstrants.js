@@ -20,6 +20,20 @@ const _globalConstrants = {
     },
     _pages:{
         apps:{
+            appDesignM:{
+                design:{
+                    en:"design",
+                    cn:"品种设计",
+                },
+                specification:{
+                    en:"specification",
+                    cn:"设计规范",
+                },
+                install:{
+                    en:"install",
+                    cn:"安装规范",
+                }
+            },
             appMarketM:{
                 crm:{
                     en:"crm",
@@ -57,7 +71,81 @@ const _globalConstrants = {
                     en:"returnGoods",
                     cn:"退货信息",
                 }
-            }
+            },
+            appPurchaseM:{
+                applyForm:{
+                    en:"applyForm",
+                    cn:"采购申请",
+                },
+                inWarehouse:{
+                    en:"inWarehouse",
+                    cn:"采购入库",
+                },
+                pay:{
+                    en:"pay",
+                    cn:"采购付款",
+                },
+                returnGoods:{
+                    en:"returnGoods",
+                    cn:"采购退货",
+                },
+                stats:{
+                    en:"stats",
+                    cn:"采购统计",
+                },
+                supplier:{
+                    en:"supplier",
+                    cn:"供应商",
+                },
+            },
+            appSystemM:{
+                passwordReset:{
+                    en:"passwordReset",
+                    cn:"密码重置",
+                },
+                authority:{
+                    en:"authority",
+                    cn:"权限设置",
+                },
+                information:{
+                    en:"information",
+                    cn:"信息设置",
+                },
+                dataArchive:{
+                    en:"dataArchive",
+                    cn:"数据安全",
+                },
+                systemSetting:{
+                    en:"systemSetting",
+                    cn:"系统设置",
+                },
+            },
+            appWarehouseM:{
+                productsInOut:{
+                    en:"productsInOut",
+                    cn:"半/成品",
+                },
+                rawMaterialInOut:{
+                    en:"rawMaterialInOut",
+                    cn:"原/材料",
+                },
+                inventory:{
+                    en:"inventory",
+                    cn:"库存明细",
+                },
+                pickRW:{
+                    en:"pickRW",
+                    cn:"领料记录",
+                },
+                returnRW:{
+                    en:"returnRW",
+                    cn:"退料记录",
+                },
+                packaging:{
+                    en:"packaging",
+                    cn:"物流管理",
+                },
+            },
         },
         landingPage:"landing",
         childPages:{

@@ -61,8 +61,8 @@ export default class CompSider extends React.Component {
                                 <span>采购管理</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="appWarehouse">
-                            <Link to='/appWarehouse/' replace onClick={this.props.siderLinkClick}>
+                        <Menu.Item key="appWarehouseM">
+                            <Link to='/appWarehouseM/' replace onClick={this.props.siderLinkClick}>
                                 <Icon type="database"/>
                                 <span>仓库管理</span>
                             </Link>

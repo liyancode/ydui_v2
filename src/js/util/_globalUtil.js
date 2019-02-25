@@ -11,12 +11,20 @@ function _pathnameToMenukey() {
         return "home"
     }else if(pathname.indexOf("/appHR")===0){
         return "appHR"
-    }else if(pathname.indexOf("/appCRM")===0){
-        return "appCRM"
-    }else if(pathname.indexOf("/appOrder")===0){
-        return "appOrder"
-    }else if(pathname.indexOf("/appWarehouse")===0){
-        return "appWarehouse"
+    }else if(pathname.indexOf("/appMarketM")===0){
+        return "appMarketM"
+    }else if(pathname.indexOf("/appDesignM")===0){
+        return "appDesignM"
+    }else if(pathname.indexOf("/appPurchaseM")===0){
+        return "appPurchaseM"
+    }else if(pathname.indexOf("/appProduceM")===0){
+        return "appProduceM"
+    }else if(pathname.indexOf("/appWarehouseM")===0){
+        return "appWarehouseM"
+    }else if(pathname.indexOf("/appFinanceM")===0){
+        return "appFinanceM"
+    }else if(pathname.indexOf("/appSystemM")===0){
+        return "appSystemM"
     }else{
         return "home"
     }

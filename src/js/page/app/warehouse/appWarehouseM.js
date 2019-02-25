@@ -7,7 +7,7 @@ const {Content,} = Layout;
 const TabPane = Tabs.TabPane;
 const _styles = _globalConstrants._styles
 // sub module key words
-const _subConstrants = _globalConstrants._pages.apps.appDesignM
+const _subConstrants = _globalConstrants._pages.apps.appWarehouseM
 const _childPages = _globalConstrants._pages.childPages
 
 const PageContent = (props) => {
@@ -24,44 +24,105 @@ const PageContent = (props) => {
     switch (props.sub) {
         case _globalConstrants._pages.landingPage:
             _pageContent = <div>
-                <Divider orientation="left">风管设计管理</Divider>
+                <Divider orientation="left">出/入库管理</Divider>
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
-                        <Button style={_styles.styleFLogo} module={_subConstrants.design.en}
+                        <Button style={_styles.styleFLogo} module={_subConstrants.productsInOut.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon className="module_button_icon" type={"project"}/>
-                            <span className="module_button_text">{_subConstrants.design.cn}</span>
+                            <Icon className="module_button_icon" type={"interation"}/>
+                            <span className="module_button_text">{_subConstrants.productsInOut.cn}</span>
                         </Button>
-                        <Button style={_styles.styleFLogo} module={_subConstrants.specification.en}
+                        <Button style={_styles.styleFLogo} module={_subConstrants.rawMaterialInOut.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon className="module_button_icon" type={"read"}/>
-                            <span className="module_button_text">{_subConstrants.specification.cn}</span>
+                            <Icon className="module_button_icon" type={"interation"}/>
+                            <span className="module_button_text">{_subConstrants.rawMaterialInOut.cn}</span>
                         </Button>
-                        <Button style={_styles.styleFLogo} module={_subConstrants.install.en}
+                    </Col>
+                </Row>
+                <Divider orientation="left">库存管理</Divider>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
+                    <Col className="gutter-row">
+                        <Button style={_styles.styleFLogo} module={_subConstrants.inventory.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon className="module_button_icon" type={"tool"}/>
-                            <span className="module_button_text">{_subConstrants.install.cn}</span>
+                            <Icon className="module_button_icon" type={"table"}/>
+                            <span className="module_button_text">{_subConstrants.inventory.cn}</span>
+                        </Button>
+                        <Button style={_styles.styleFLogo} module={_subConstrants.pickRW.en}
+                                onClick={props.moduleButtonClick}>
+                            <Icon className="module_button_icon" type={"file-done"}/>
+                            <span className="module_button_text">{_subConstrants.pickRW.cn}</span>
+                        </Button>
+                        <Button style={_styles.styleFLogo} module={_subConstrants.returnRW.en}
+                                onClick={props.moduleButtonClick}>
+                            <Icon className="module_button_icon" type={"exception"}/>
+                            <span className="module_button_text">{_subConstrants.returnRW.cn}</span>
+                        </Button>
+                    </Col>
+                </Row>
+                <Divider orientation="left">物流管理</Divider>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
+                    <Col className="gutter-row">
+                        <Button style={_styles.styleFLogo} module={_subConstrants.packaging.en}
+                                onClick={props.moduleButtonClick}>
+                            <Icon className="module_button_icon" type={"dropbox"}/>
+                            <span className="module_button_text">{_subConstrants.packaging.cn}</span>
                         </Button>
                     </Col>
                 </Row>
             </div>
             break;
-        case _subConstrants.design.en:
+        case _subConstrants.productsInOut.en:
             _pageContent = <div>
                 <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
                     <Icon type="left"/>
                     <span>返回</span>
                 </Button>
-                {_subConstrants.design.cn}
+                {_subConstrants.productsInOut.cn}
             </div>
             break;
-        case _subConstrants.specification.en:
+        case _subConstrants.rawMaterialInOut.en:
             _pageContent = <div>
                 <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
                     <Icon type="left"/>
                     <span>返回</span>
                 </Button>
-                {_subConstrants.specification.cn}
+                {_subConstrants.rawMaterialInOut.cn}
+            </div>
+            break;
+        case _subConstrants.inventory.en:
+            _pageContent = <div>
+                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
+                    <Icon type="left"/>
+                    <span>返回</span>
+                </Button>
+                {_subConstrants.inventory.cn}
+            </div>
+            break;
+        case _subConstrants.pickRW.en:
+            _pageContent = <div>
+                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
+                    <Icon type="left"/>
+                    <span>返回</span>
+                </Button>
+                {_subConstrants.pickRW.cn}
+            </div>
+            break;
+        case _subConstrants.returnRW.en:
+            _pageContent = <div>
+                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
+                    <Icon type="left"/>
+                    <span>返回</span>
+                </Button>
+                {_subConstrants.returnRW.cn}
+            </div>
+            break;
+        case _subConstrants.packaging.en:
+            _pageContent = <div>
+                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
+                    <Icon type="left"/>
+                    <span>返回</span>
+                </Button>
+                {_subConstrants.packaging.cn}
             </div>
             break;
         case _subConstrants.install.en:
@@ -79,13 +140,13 @@ const PageContent = (props) => {
     return <Spin spinning={props.loading}>{_pageContent}</Spin>
 }
 
-export default class AppDesignM extends React.Component {
+export default class AppWarehouseM extends React.Component {
     constructor(props) {
         super(props);
         const _sub = _globalUtil._getSearchSub()
         this.state = {
             loading: false,
-            breadcrumbLanding:"设计管理",
+            breadcrumbLanding:"仓库管理",
             breadcrumb: _subConstrants[_sub]?_subConstrants[_sub].cn:'',
             sub: _sub ? _sub : _globalConstrants._pages.landingPage,
             childPage: _childPages.all,
@@ -125,7 +186,7 @@ export default class AppDesignM extends React.Component {
             <div>
                 <div className="page-header">
                     <h4 style={{display: "inline"}}>
-                        <Icon type="experiment" />
+                        <Icon type="database" />
                         <span>{this.state.breadcrumbLanding}</span>
                     </h4>
                     <Breadcrumb style={{display: "inline"}}>
