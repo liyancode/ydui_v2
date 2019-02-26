@@ -4,6 +4,7 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 export const service_Util_ = {
+    heart_beat,
     common_Post_,
     common_Delete_,
     common_Put_,
@@ -42,4 +43,12 @@ function common_Get_(path, key) {
         headers: authHeader()
     };
     return fetch(path + key, requestOptions);
+}
+
+function heart_beat() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch('/api/service/user/_hb_/',requestOptions);
 }
