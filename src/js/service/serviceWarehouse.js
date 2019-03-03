@@ -45,6 +45,7 @@ export const serviceWarehouse = {
     //wh_out_record
     addWHOutRecord,
     updateWHOutRecord,
+    getWHOutRecordById,
     getWHOutRecordAll,
 };
 
@@ -162,6 +163,10 @@ function addWHOutRecord(body) {
 
 function updateWHOutRecord(body) {
     return service_Util_.common_Put_(apiPrefix + `/wh_out_record`, body).then(handleResponse);
+}
+// getWHOutRecordById
+function getWHOutRecordById(recordId) {
+    return service_Util_.common_Get_(apiPrefix + `/wh_out_record/`, recordId).then(handleResponse);
 }
 
 function getWHOutRecordAll() {
