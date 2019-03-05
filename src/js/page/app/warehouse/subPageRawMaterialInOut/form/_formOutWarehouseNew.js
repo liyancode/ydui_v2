@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input, Select, Popconfirm, Icon, Button, Card,DatePicker} from 'antd';
+import {Form, Input, Select, Popconfirm, Icon, Button, Card,DatePicker,Drawer} from 'antd';
 import {_WH_Config} from '../../_wh_config';
 
 const FormItem = Form.Item;
@@ -13,11 +13,24 @@ class _formOutWarehouseNew extends React.Component {
         super(props);
         this.state = {
             loading: false,
+            visible:false,
             confirmDirty: false,
             autoCompleteResult: [],
             items: [
                 {
                     num: 1,
+                    name: "春秋丁",
+                    specific: "320cm",
+                    packingCount: 5,
+                    packingCountUnit: 'kg',
+                    aCount: 1,
+                    aCountUnit: 'juan',
+                    comment: "ddd",
+                    unitPrice: 22,
+                    totalPrice: 110
+                },
+                {
+                    num: 2,
                     name: "春秋丁",
                     specific: "320cm",
                     packingCount: 5,
@@ -92,6 +105,18 @@ class _formOutWarehouseNew extends React.Component {
         const value = e.target.value;
         this.setState({confirmDirty: this.state.confirmDirty || !!value});
     }
+
+    showDrawer = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    onClose = () => {
+        this.setState({
+            visible: false,
+        });
+    };
 
     render() {
         const {getFieldDecorator} = this.props.form;
@@ -361,7 +386,7 @@ class _formOutWarehouseNew extends React.Component {
                             {items}
                             <tr>
                                 <td colSpan={1}>
-                                    <Button type="primary" style={{}} onClick="">
+                                    <Button type="primary" style={{}} onClick={this.showDrawer}>
                                         <Icon type="plus"/>
                                     </Button>
                                 </td>
@@ -452,6 +477,21 @@ class _formOutWarehouseNew extends React.Component {
                         </Popconfirm>
                     </FormItem>
                 </Form>
+                <Drawer
+                    title="添加出库信息"
+                    width={720}
+                    onClose={this.onClose}
+                    visible={this.state.visible}
+                    style={{
+                        overflow: 'auto',
+                        height: 'calc(100% - 108px)',
+                        paddingBottom: '108px',
+                    }}
+                >
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                </Drawer>
             </div>
         );
     }

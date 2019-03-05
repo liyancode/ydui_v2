@@ -2,8 +2,8 @@ import React from 'react';
 import {Layout, Breadcrumb, Tabs, Collapse, Spin, Icon, Row, Col, Divider, Table, Button} from 'antd';
 import _globalConstrants from "../../../util/_globalConstrants"
 import _globalUtil from "../../../util/_globalUtil";
-// import SubPageRawMaterialInOut from "./subPageRawMaterialInOut/subPageRawMaterialInOut"
 import SubPageRawMaterialInOut from "./subPageRawMaterialInOut/subPageRMInOut"
+import SubPageWHInventory from "./subPageWHInventory/subPageWHInventory"
 
 const {Content,} = Layout;
 const TabPane = Tabs.TabPane;
@@ -87,13 +87,7 @@ const PageContent = (props) => {
                 <SubPageRawMaterialInOut backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.inventory.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.inventory.cn}
-            </div>
+            _pageContent = <SubPageWHInventory backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.pickRW.en:
             _pageContent = <div>
