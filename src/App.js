@@ -65,7 +65,7 @@ export default class AppRouter extends React.Component {
                         console.log("ok")
                     }
                 })
-            },15000)
+            },60000*5)
         }else{
             console.log("login page")
         }

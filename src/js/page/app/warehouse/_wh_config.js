@@ -91,7 +91,11 @@ function _sort_list_arr_by_batch_at(a, b) {
 }
 
 function _format_time_string_by_day(timeStr){
-    return timeStr.split('+')[0].replace(/(^\s*)|(\s*$)/g, "").split(' ')[0];
+    let splitStr=' ';
+    if(timeStr.indexOf('T')>0){
+        splitStr="T"
+    }
+    return timeStr.split('+')[0].replace(/(^\s*)|(\s*$)/g, "").split(splitStr)[0];
 }
 
 function _format_time_string_by_minute(timeStr){

@@ -137,18 +137,21 @@ class _formNewWHInventory extends React.Component {
                 {_WH_Config._measure_unit_options()}
             </Select>
         );
+        const styleMarginBottom0={marginBottom:0};
         return (
             <Spin spinning={this.state.loading}>
                 <Form onSubmit={this.handleSubmit} style={{maxWidth: '800px'}}>
                     <FormItem
                         {...formItemLayout}
                         label="类别"
+                        style={styleMarginBottom0}
                     >
                         {typeSelector}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="名称"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('name', {
                             rules: [{
@@ -161,6 +164,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="编号"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('wh_inventory_id', {
                             rules: [{
@@ -173,6 +177,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="规格"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('specification', {
                             rules: [{
@@ -185,6 +190,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="单价(元)"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('unit_price', {
                             rules: [{
@@ -197,6 +203,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="库存数"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('count', {
                             rules: [{
@@ -209,12 +216,14 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="库存单位"
+                        style={styleMarginBottom0}
                     >
                         {countUnitSelector}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="辅助计数"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('auxiliary_count', {
                             rules: [{
@@ -227,6 +236,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="辅助计数单位"
+                        style={styleMarginBottom0}
                     >
                         {auxiliaryCountUnitSelector}
                     </FormItem>
@@ -234,6 +244,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="详细描述"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('description', {
                             rules: [],
@@ -244,6 +255,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="负责人"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('principal', {
                             rules: [{
@@ -256,12 +268,14 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="原料仓库"
+                        style={styleMarginBottom0}
                     >
                         {whLocationSelector}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="仓库内部位置"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('wh_inner_location', {
                             rules: [{
@@ -274,6 +288,7 @@ class _formNewWHInventory extends React.Component {
                     <FormItem
                         {...formItemLayout}
                         label="备注说明"
+                        style={styleMarginBottom0}
                     >
                         {getFieldDecorator('comment', {
                             rules: [{

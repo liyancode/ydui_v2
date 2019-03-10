@@ -81,7 +81,7 @@ const PageContent = (props) => {
                             <span className="module_button_text">{_subConstrants.crm.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.order.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe62e;</span>
                             <span className="module_button_text">{_subConstrants.order.cn}</span>
                         </Button>
@@ -91,22 +91,22 @@ const PageContent = (props) => {
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.approvePrice.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe681;</span>
                             <span className="module_button_text">{_subConstrants.approvePrice.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.approveDeliveryDate.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe6c3;</span>
                             <span className="module_button_text">{_subConstrants.approveDeliveryDate.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.approvePurchaseRequest.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe64f;</span>
                             <span className="module_button_text">{_subConstrants.approvePurchaseRequest.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.approvePrepareGoods.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe651;</span>
                             <span className="module_button_text">{_subConstrants.approvePrepareGoods.cn}</span>
                         </Button>
@@ -116,7 +116,7 @@ const PageContent = (props) => {
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.reconciliation.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe60d;</span>
                             <span className="module_button_text">{_subConstrants.reconciliation.cn}</span>
                         </Button>
@@ -126,7 +126,7 @@ const PageContent = (props) => {
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.saleStats.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe637;</span>
                             <span className="module_button_text">{_subConstrants.saleStats.cn}</span>
                         </Button>
@@ -136,7 +136,7 @@ const PageContent = (props) => {
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.returnGoods.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick}disabled={true} title={"开发中..."}>
                             <span className="module_button_icon iconfont_marketM">&#xe602;</span>
                             <span className="module_button_text">{_subConstrants.returnGoods.cn}</span>
                         </Button>

@@ -1,7 +1,10 @@
+import JsBarcode from 'jsbarcode'
+import { createCanvas } from 'canvas'
 const _globalUtil = {
     _pathnameToMenukey,
     _getSearchSub,
     _setSearchSub,
+    _generateBarcode,
 }
 export default _globalUtil
 function _pathnameToMenukey() {
@@ -46,4 +49,15 @@ function _getSearchSub() {
 function _setSearchSub(sub) {
     // window.location.search="?sub="+sub
     window.history.pushState(sub, sub, "?sub="+sub);
+}
+
+function _generateBarcode(id,text) {
+    var barcode = document.getElementById(id),
+        options = {
+            format:"CODE128",
+            displayValue:true,
+            fontSize:12,
+            height:50
+        };
+    JsBarcode(barcode, text, options);//原生
 }

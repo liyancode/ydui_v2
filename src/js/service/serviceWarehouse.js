@@ -30,6 +30,7 @@ export const serviceWarehouse = {
     updateWHInventory,
     getWHInventoryByInventoryId,
     getWHInventoryListByInventoryType,
+    getWHInventoryListByInventoryTypeIds,
 
     //wh_inventory_batch
     addWHInventoryBatch,
@@ -45,6 +46,7 @@ export const serviceWarehouse = {
     //wh_out_record
     addWHOutRecord,
     updateWHOutRecord,
+    updateWHOutRecordStatus,
     getWHOutRecordById,
     getWHOutRecordAll,
 };
@@ -118,6 +120,10 @@ function getWHInventoryByInventoryId(key) {
 function getWHInventoryListByInventoryType(key) {
     return service_Util_.common_Get_(apiPrefix + `/wh_inventory/list/by_wh_inventory_type/`, key).then(handleResponse);
 }
+function getWHInventoryListByInventoryTypeIds(type,ids) {
+    return service_Util_.common_Get_(apiPrefix + `/wh_inventory/list/by_wh_inventory_type_ids/`+type+'?ids='+ids,'' ).then(handleResponse);
+}
+
 
 //wh_inventory_batch
 function addWHInventoryBatch(body) {
@@ -164,6 +170,10 @@ function addWHOutRecord(body) {
 function updateWHOutRecord(body) {
     return service_Util_.common_Put_(apiPrefix + `/wh_out_record`, body).then(handleResponse);
 }
+
+function updateWHOutRecordStatus(wh_out_record_id,new_status) {
+    return service_Util_.common_Put_(apiPrefix + `/wh_out_record/update_status/`+wh_out_record_id+'?new_status='+new_status, {}).then(handleResponse);
+}
 // getWHOutRecordById
 function getWHOutRecordById(recordId) {
     return service_Util_.common_Get_(apiPrefix + `/wh_out_record/`, recordId).then(handleResponse);
@@ -196,7 +206,7 @@ function handleResponse(response) {
         return null;
     } else {
         if (response.status === 201) {
-            message.success("操作完成！")
+            message.success("提交成功！")
         }
         return response.text().then(text => {
             let data = text && JSON.parse(text);

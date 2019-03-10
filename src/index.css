@@ -117,7 +117,7 @@ code {
 }
 
 #wh_out_record_form_table tr > td {
-    padding: 8px 8px;
+    padding: 4px 4px;
     border-right: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
     box-sizing: border-box;
@@ -130,4 +130,19 @@ code {
 #wh_out_record_form_table input {
     border: 0;
     border-bottom: 1px solid;
+}
+
+#wh_out_record_form_table_modal {
+    background-color: white;
+    width: 100%;
+    /*border: 1px solid black;*/
+    border-top: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+}
+
+#wh_out_record_form_table_modal tr > td {
+    padding: 3px 3px;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    box-sizing: border-box;
 }

@@ -29,15 +29,17 @@ const PageContent = (props) => {
                 <Divider orientation="left">出/入库管理</Divider>
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
-                        <Button style={_styles.styleFLogo} module={_subConstrants.productsInOut.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon className="module_button_icon" type={"interation"}/>
-                            <span className="module_button_text">{_subConstrants.productsInOut.cn}</span>
-                        </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.rawMaterialInOut.en}
                                 onClick={props.moduleButtonClick}>
                             <Icon className="module_button_icon" type={"interation"}/>
                             <span className="module_button_text">{_subConstrants.rawMaterialInOut.cn}</span>
+                        </Button>
+                        <Button style={_styles.styleFLogo} module={_subConstrants.productsInOut.en}
+                                onClick={props.moduleButtonClick}
+                                disabled={true} title={"开发中..."}
+                        >
+                            <Icon className="module_button_icon" type={"interation"}/>
+                            <span className="module_button_text">{_subConstrants.productsInOut.cn}</span>
                         </Button>
                     </Col>
                 </Row>
@@ -50,12 +52,12 @@ const PageContent = (props) => {
                             <span className="module_button_text">{_subConstrants.inventory.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.pickRW.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
                             <Icon className="module_button_icon" type={"file-done"}/>
                             <span className="module_button_text">{_subConstrants.pickRW.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.returnRW.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
                             <Icon className="module_button_icon" type={"exception"}/>
                             <span className="module_button_text">{_subConstrants.returnRW.cn}</span>
                         </Button>
@@ -65,7 +67,7 @@ const PageContent = (props) => {
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.packaging.en}
-                                onClick={props.moduleButtonClick}>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
                             <Icon className="module_button_icon" type={"dropbox"}/>
                             <span className="module_button_text">{_subConstrants.packaging.cn}</span>
                         </Button>
