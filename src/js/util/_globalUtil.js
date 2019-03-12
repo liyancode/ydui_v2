@@ -1,10 +1,12 @@
 import JsBarcode from 'jsbarcode'
-import { createCanvas } from 'canvas'
+import html2pdf from 'html2pdf.js'
+
 const _globalUtil = {
     _pathnameToMenukey,
     _getSearchSub,
     _setSearchSub,
     _generateBarcode,
+    _saveHtmlToPDFFile,
 }
 export default _globalUtil
 function _pathnameToMenukey() {
@@ -60,4 +62,18 @@ function _generateBarcode(id,text) {
             height:50
         };
     JsBarcode(barcode, text, options);//原生
+}
+
+function _saveHtmlToPDFFile(elementId,fileName){
+    const input = document.getElementById(elementId);
+    const opt = {
+        margin:       0.2,
+        filename:     fileName,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // New Promise-based usage:
+    html2pdf().set(opt).from(input).save();
 }

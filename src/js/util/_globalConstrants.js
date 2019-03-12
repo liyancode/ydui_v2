@@ -20,6 +20,48 @@ const _globalConstrants = {
     },
     _pages:{
         apps:{
+            appHR:{
+                myInfo:{
+                    en:"myInfo",
+                    cn:"我的信息",
+                },
+                officeSupplies:{
+                    en:"officeSupplies",
+                    cn:"办公用品",
+                },
+                employeeProfile:{
+                    en:"employeeProfile",
+                    cn:"员工档案",
+                },
+                pto:{
+                    en:"pto",
+                    cn:"请假调休",
+                },
+                reimbursement:{
+                    en:"reimbursement",
+                    cn:"报销管理",
+                },
+                resignationLetter:{
+                    en:"resignationLetter",
+                    cn:"离职申请",
+                },
+                announcement:{
+                    en:"announcement",
+                    cn:"通知公告",
+                },
+                rulesAndRegulations:{
+                    en:"rulesAndRegulations",
+                    cn:"规章制度",
+                },
+                electronicData:{
+                    en:"electronicData",
+                    cn:"电子资料",
+                },
+                performanceAppraisal:{
+                    en:"performanceAppraisal",
+                    cn:"绩效考核",
+                },
+            },
             appDesignM:{
                 design:{
                     en:"design",

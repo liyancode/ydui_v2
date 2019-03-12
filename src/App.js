@@ -13,7 +13,7 @@ import CompFooter from "./js/page/component/compFooter"
 import CompNotLogin from "./js/page/component/compNotLogin"
 import {PrivateRoute} from "./PrivateRoute";
 import AppHome from "./js/page/app/home/appHome"
-import AppHR from "./js/page/app/hr/appHR"
+import AppHR from "./js/page/app/hr/appHRM"
 import AppDesignM from "./js/page/app/designm/appDesignM"
 import AppFinanceM from "./js/page/app/financem/appFinanceM"
 import AppMarketM from "./js/page/app/marketm/appMarketM"

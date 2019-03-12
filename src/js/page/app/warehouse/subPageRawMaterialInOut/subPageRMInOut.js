@@ -335,6 +335,7 @@ const PageContent = (props) => {
                 </div>
                 {baseInfo}
                 <br/>
+                <Button type={"primary"} onClick={()=>_globalUtil._saveHtmlToPDFFile('wh_out_record_form_table','test.pdf')}>打印</Button>
                 <Card style={{backgroundColor: "#e8e8e8", padding: 0, overflow: "scroll"}}>{detailDiv}</Card>
             </div>
             break
