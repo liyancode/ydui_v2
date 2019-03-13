@@ -17,13 +17,14 @@ const PageContent = (props) => {
     </div>
 
     const fileList=[
-        '员工手册(3.3).pdf'
+        '员工手册-2019.3.3.pdf',
+        '考勤管理制度-2019.2.22.pdf'
     ]
     switch (_pstate.childPage) {
         case _childPages.all:
             _pageContent = <div>
                 <div>
-                    <Button type="primary" className="btn_backTOLanding" onClick={props.backAllBtnOnclick}>
+                    <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
                         <Icon type="left"/>
                         <span>返回</span>
                     </Button>
@@ -34,7 +35,7 @@ const PageContent = (props) => {
                     bordered
                     dataSource={fileList}
                     renderItem={
-                        item => (<List.Item><a href={"/files/"+item}>{item}</a></List.Item>)}
+                        item => (<List.Item><a href={"/files/"+item} target={"_blank"}>{item}</a></List.Item>)}
                 />
             </div>
             break
