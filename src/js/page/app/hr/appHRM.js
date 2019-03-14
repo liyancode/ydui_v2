@@ -3,6 +3,7 @@ import {Layout, Breadcrumb, Tabs, Collapse, Spin, Icon, Row, Col, Divider, Table
 import _globalConstrants from "../../../util/_globalConstrants"
 import _globalUtil from "../../../util/_globalUtil";
 
+import SubPageMyInfo from "./subMyInfo/subMyInfo";
 import SubPageRulesAndRegulations from "./subPageRulesAndRegulations/subPageRulesAndRegulations";
 
 const {Content,} = Layout;
@@ -99,13 +100,8 @@ const PageContent = (props) => {
             </div>
             break;
         case _subConstrants.myInfo.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.myInfo.cn}
-            </div>
+            _pageContent =
+                <SubPageMyInfo backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.officeSupplies.en:
             _pageContent = <div>
