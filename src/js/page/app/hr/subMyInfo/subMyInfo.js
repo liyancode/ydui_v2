@@ -53,7 +53,7 @@ const PageContent = (props) => {
                 for (let i = 0; i < user_login_history.length; i++) {
                     ip_info = user_login_history[i].ip_location_info
                     login_hist.push(
-                        <p>{user_login_history[i].created_at} IP:{user_login_history[i].rq_ip} 地点：{ip_info.country_name}</p>)
+                        <p>{user_login_history[i].created_at} IP:{user_login_history[i].rq_ip} {ip_info.country_name+" "+ip_info.city}</p>)
                 }
                 infoContent = <div>
                     <div className="col-sm-12 col-md-4">
