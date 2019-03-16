@@ -47,8 +47,16 @@ const PageContent = (props) => {
                 const user_department = _pstate.dataOne.user_department;
                 const user_private_info = _pstate.dataOne.user_private_info;
                 const user_employee_info = _pstate.dataOne.user_employee_info;
+                const user_login_history = _pstate.dataOne.user_login_history.login_history;
+                let login_hist = []
+                let ip_info = ''
+                for (let i = 0; i < user_login_history.length; i++) {
+                    ip_info = user_login_history[i].ip_location_info
+                    login_hist.push(
+                        <p>{user_login_history[i].created_at} IP:{user_login_history[i].rq_ip} 地点：{ip_info.country_name}</p>)
+                }
                 infoContent = <div>
-                    <div className="col-sm-12 col-md-3">
+                    <div className="col-sm-12 col-md-4">
                         {/*authorities: "hr:rw,crm:rw,order:rw,fin:rw,product:rw,warehouse:rw"*/}
                         {/*comment: null*/}
                         {/*created_at: "2018-12-08 17:53:31 +0800"*/}
@@ -60,15 +68,22 @@ const PageContent = (props) => {
                         {/*status: 1*/}
                         {/*user_name: "admin"*/}
                         <Divider orientation={"left"}><span>账号信息</span><Icon type="key"/></Divider>
-                        <p>用户名：{user_account.user_name}</p>
-                        <p>系统权限：<Tag style={{color: "red"}}>管理员</Tag></p>
-                        <Button type="danger" className="btn_backTOLanding" onClick={props.updatePasswordBtnOnclick}>
-                            <Icon type="unlock"/>
-                            <span>修改密码</span>
-                        </Button>
-                        <div>
+                        <div className="btn_backTOLanding">
+                            用户名：{user_account.user_name}
+                        </div>
+                        <div className="btn_backTOLanding">
+                            <Button type="danger" className="btn_backTOLanding" size={"small"}
+                                    onClick={props.updatePasswordBtnOnclick}>
+                                <Icon type="unlock"/>
+                                <span>修改密码</span>
+                            </Button>
                             <Icon type="bulb" style={{color: "#00ac47"}}/>
                             <span>修改其他信息，请找管理员。</span>
+                        </div>
+                        <div className="btn_backTOLanding">系统权限：<Tag style={{color: "red"}}>管理员</Tag></div>
+                        <div className="btn_backTOLanding">
+                            <h5>最近登录:</h5>
+                            {login_hist}
                         </div>
                     </div>
                     <div className="col-sm-12 col-md-4">
