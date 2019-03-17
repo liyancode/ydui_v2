@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "latest",
+    "antd": "^3.15.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "3.3.7",
     "canvas": "^2.3.1",
