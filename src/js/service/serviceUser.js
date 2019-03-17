@@ -48,6 +48,7 @@ export const serviceUser = {
     getUserListByDepartmentId,
     getUserListForAdmin,
 
+    //full info
     addUserAccountEmployeePrivateInfo,
     updateUserAccountEmployeePrivateInfo,
     getUserFullInfoByUsername,

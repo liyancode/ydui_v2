@@ -1,8 +1,10 @@
 import React from "react";
-import {List, Icon, Button, Spin, Table, Tag, Divider} from 'antd';
+import {Empty, Icon, Button, Spin, Table, Tag, Divider, Statistic, Row, Col} from 'antd';
 import _globalConstrants from "../../../../util/_globalConstrants";
+import _globalUtil from "../../../../util/_globalUtil"
 import {serviceUser} from "../../../../service/serviceUser";
-import WrappedFormResetPassword from "./form/_formResetPassword"
+import WrappedFormEditEmployeeProfile from "./form/_formEditEmployeeProfile"
+import WrappedFormNewEmployeeProfile from "./form/_formNewEmployeeProfile"
 
 const _childPages = _globalConstrants._pages.childPages
 
@@ -25,18 +27,124 @@ const PageContent = (props) => {
         {_globalConstrants._pages.errorPage}
     </div>
 
-    const fileList = [
-        '员工手册-2019.3.3.pdf',
-        '考勤管理制度-2019.2.22.pdf'
-    ]
     switch (_pstate.childPage) {
         case _childPages.all:
+            const users_table_columns = [
+                {
+                    title: '员工ID',
+                    dataIndex: 'employee_number',
+                    key: 'employee_number',
+                    defaultSortOrder: 'ascend',
+                    sorter: (a, b) => a.employee_number > b.employee_number?1:-1,
+                },
+                {
+                    title: '用户名',
+                    dataIndex: 'user_name',
+                    key: 'user_name',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.user_name > b.user_name?1:-1,
+                },
+                {
+                    title: '姓名',
+                    dataIndex: 'full_name',
+                    key: 'full_name',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.full_name > b.full_name?1:-1,
+                },
+                {
+                    title: '性别',
+                    dataIndex: 'gender',
+                    key: 'gender',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.gender > b.gender?1:-1,
+                    render: (text, record) => (
+                        record["gender"] === 0 ?
+                            <div><Icon type="woman" style={{color: 'pink'}}/><span>女</span></div>
+                            : <div><Icon type="man" style={{color: 'blue'}}/><span>男</span></div>)
+                },
+                {
+                    title: '部门',
+                    dataIndex: 'department_name',
+                    key: 'department_name',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.department_name > b.department_name?1:-1,
+                },
+                {
+                    title: '职位',
+                    dataIndex: 'title',
+                    key: 'title',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.title > b.title?1:-1,
+                },
+                {
+                    title: '入职时间',
+                    dataIndex: 'onboard_date',
+                    key: 'onboard_date',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.onboard_date > b.onboard_date?1:-1,
+                    render:(text, record)=>{
+                        return _globalUtil._format_time_string_by_day(record.onboard_date)
+                    }
+                },
+                {
+                    title: '当前状态',
+                    dataIndex: 'employee_status',
+                    key: 'employee_status',
+                    defaultSortOrder: 'descend',
+                    sorter: (a, b) => a.employee_status > b.employee_status?1:-1,
+                    render: (text, record) => (
+                        positionStatusTag[record["employee_status"]]
+                    )
+                },
+                {
+                    title: '操作',
+                    key: 'action',
+                    render: (text, record) => {
+                        return (<span>
+                        <a href="javascript:;" onClick={props.checkDetailOnclick}
+                           user_name={record["user_name"]}>详细信息</a>
+                        </span>)
+                    },
+                }
+            ]
+
+            let manCount=0;
+            for(let i=0;i<_pstate.dataList.length;i++){
+                if(_pstate.dataList[i].gender===1){
+                    manCount+=1
+                }
+            }
             _pageContent = <div>
                 <div>
                     <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
                         <Icon type="left"/>
                         <span>返回</span>
                     </Button>
+                    <Spin spinning={_pstate.loading} tip="加载中..." size="large">
+                        <Row gutter={16}>
+                            <Col span={8} style={{textAlign:"center"}}>
+                                <Statistic title="员工总数" value={_pstate.dataList.length} prefix={<Icon type="user"/>} />
+                            </Col>
+                            <Col span={8} style={{textAlign:"center"}}>
+                                <Statistic title="女员工" value={_pstate.dataList.length-manCount} prefix={<Icon type="woman" style={{color: 'pink'}}/>}/>
+                            </Col>
+                            <Col span={8} style={{textAlign:"center"}}>
+                                <Statistic title="男员工" value={manCount} prefix={<Icon type="man" style={{color: 'blue'}}/>}/>
+                            </Col>
+                        </Row>
+                        <hr/>
+                        <Button type="primary" className="btn_backTOLanding" onClick={props.addNewBtnOnclick}>
+                            <Icon type="user-add"/>
+                            <span>添加员工信息</span>
+                        </Button>
+                        <Button type="primary" className="btn_backTOLanding"
+                                loading={_pstate.loading} onClick={props.reloadBtnOnclick}>
+                            <Icon type="reload"/>
+                            <span>刷新</span>
+                        </Button>
+                        <Table rowKey="user_name" columns={users_table_columns}
+                               dataSource={_pstate.dataList} size="small"/>
+                    </Spin>
                 </div>
             </div>
             break
@@ -46,7 +154,6 @@ const PageContent = (props) => {
                 let login_hist = []
                 let ip_info = ''
                 try{
-
                     const user_account = _pstate.dataOne.user_account;
                     const user_department = _pstate.dataOne.user_department;
                     const user_private_info = _pstate.dataOne.user_private_info;
@@ -57,69 +164,35 @@ const PageContent = (props) => {
                         login_hist.push(
                             <p>{user_login_history[i].created_at} IP:{user_login_history[i].rq_ip} {ip_info.country_name+" "+ip_info.city}</p>)
                     }
+                    if(login_hist.length===0){
+                        login_hist = [<Empty size={"small"}/>]
+                    }
+
                     infoContent = <div>
                         <div className="col-sm-12 col-md-4">
-                            {/*authorities: "hr:rw,crm:rw,order:rw,fin:rw,product:rw,warehouse:rw"*/}
-                            {/*comment: null*/}
-                            {/*created_at: "2018-12-08 17:53:31 +0800"*/}
-                            {/*created_by: "new01"*/}
-                            {/*id: 11*/}
-                            {/*last_update_at: "2018-12-22 13:44:37 +0800"*/}
-                            {/*last_update_by: "new01"*/}
-                            {/*password: "***"*/}
-                            {/*status: 1*/}
-                            {/*user_name: "admin"*/}
                             <Divider orientation={"left"}><span>账号信息</span><Icon type="key"/></Divider>
                             <div className="btn_backTOLanding">
                                 用户名：{user_account.user_name}
                             </div>
-                            <div className="btn_backTOLanding">
-                                <Button type="danger" className="btn_backTOLanding" size={"small"}
-                                        onClick={props.updatePasswordBtnOnclick}>
-                                    <Icon type="unlock"/>
-                                    <span>修改密码</span>
-                                </Button>
-                                <Icon type="bulb" style={{color: "#00ac47"}}/>
-                                <span>修改其他信息，请找管理员。</span>
-                            </div>
-                            <div className="btn_backTOLanding">系统权限：<Tag style={{color: "red"}}>管理员</Tag></div>
+                            {/*<div className="btn_backTOLanding">*/}
+                                {/*<Button type="danger" className="btn_backTOLanding" size={"small"}*/}
+                                        {/*onClick={props.updatePasswordBtnOnclick}>*/}
+                                    {/*<Icon type="unlock"/>*/}
+                                    {/*<span>修改密码</span>*/}
+                                {/*</Button>*/}
+                                {/*<Icon type="bulb" style={{color: "#00ac47"}}/>*/}
+                                {/*<span>修改其他信息，请找管理员。</span>*/}
+                            {/*</div>*/}
+                            <div className="btn_backTOLanding">系统权限：<Tag style={{color: "red"}}>-</Tag></div>
                             <div className="btn_backTOLanding">
                                 <h5>最近登录:</h5>
                                 {login_hist}
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-4">
-                            {/*annual_leave_left: 0*/}
-                            {/*attendance_number: "0000"*/}
-                            {/*bank_card_belong_to: "CM"*/}
-                            {/*bank_card_number: "660000000000"*/}
-                            {/*cm_group_short_number: "1234"*/}
-                            {/*comment: null*/}
-                            {/*created_at: "2019-03-13 22:06:16 +0800"*/}
-                            {/*created_by: "admin"*/}
-                            {/*department_id: "d001"*/}
-                            {/*employee_number: "10000"*/}
-                            {/*employee_status: "normal"*/}
-                            {/*employee_type: "fte"*/}
-                            {/*entrance_card_number: "0000"*/}
-                            {/*id: 1*/}
-                            {/*last_update_at: "2019-03-13 22:06:16 +0800"*/}
-                            {/*last_update_by: "admin"*/}
-                            {/*level: 1*/}
-                            {/*onboard_date: "2000-01-01"*/}
-                            {/*report_to: null*/}
-                            {/*resignation_date: null*/}
-                            {/*status: 1*/}
-                            {/*sub_tel_number: "0001"*/}
-                            {/*title: "Admin"*/}
-                            {/*user_name: "admin"*/}
                             <Divider orientation={"left"}><span>工作信息</span><Icon type="team"/></Divider>
                             <table className="table table-bordered table-condensed">
                                 <tbody>
-                                {/*<tr>*/}
-                                {/*<td>姓名</td>*/}
-                                {/*<td>{this.state.user_employee_info["full_name"]}</td>*/}
-                                {/*</tr>*/}
                                 <tr>
                                     <td>员工编号</td>
                                     <td>{user_employee_info["employee_number"]}</td>
@@ -164,30 +237,6 @@ const PageContent = (props) => {
                             </table>
                         </div>
                         <div className="col-sm-12 col-md-4">
-                            {/*address: "add for test"*/}
-                            {/*age: 30*/}
-                            {/*birthday: "1988-01-01"*/}
-                            {/*comment: null*/}
-                            {/*created_at: "2018-12-09 21:00:57 +0800"*/}
-                            {/*created_by: "admin"*/}
-                            {/*dingding: "jack998"*/}
-                            {/*discipline: "cs"*/}
-                            {/*education: "master"*/}
-                            {/*email: "jack@test.com"*/}
-                            {/*full_name: "诸葛孔明"*/}
-                            {/*gender: 1*/}
-                            {/*graduated_school: "NKU"*/}
-                            {/*hobbies: "basketbal"*/}
-                            {/*hometown: "shanghai"*/}
-                            {/*id: 2*/}
-                            {/*last_update_at: "2018-12-15 22:45:52 +0800"*/}
-                            {/*last_update_by: "admin"*/}
-                            {/*personal_id: "310771198801012346"*/}
-                            {/*phone_number: "13023456789"*/}
-                            {/*qq: "1098767778"*/}
-                            {/*status: 1*/}
-                            {/*user_name: "admin"*/}
-                            {/*wechat: "jacktest"*/}
                             <Divider orientation={"left"}><span>个人信息</span><Icon type="solution"/></Divider>
                             <table className="table table-bordered table-condensed">
                                 <tbody>
@@ -231,11 +280,6 @@ const PageContent = (props) => {
                                 </tr>
                                 </tbody>
                             </table>
-                            {/*<Upload {...rsm_props}>*/}
-                            {/*<Button>*/}
-                            {/*<Icon type="upload" /> 上传简历*/}
-                            {/*</Button>*/}
-                            {/*</Upload>*/}
                         </div>
                     </div>
                 }catch(e){
@@ -244,19 +288,19 @@ const PageContent = (props) => {
                 }
             }
 
-
             _pageContent = <div>
                 <div>
-                    <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
+                    <Button type="primary" className="btn_backTOLanding" onClick={props.backAllBtnOnclick}>
                         <Icon type="left"/>
                         <span>返回</span>
+                    </Button>
+                    <Button type="primary" className="btn_backTOLanding" onClick={props.editOneBtnOclick}>
+                        <Icon type="edit"/>
+                        <span>更新信息</span>
                     </Button>
                 </div>
                 <Spin spinning={_pstate.loading} tip="加载中..." size="large">
                     {infoContent}
-                    <div className="col-sm-12 col-md-4">
-
-                    </div>
                 </Spin>
             </div>
             break;
@@ -268,7 +312,18 @@ const PageContent = (props) => {
                         <span>返回</span>
                     </Button>
                 </div>
-                <WrappedFormResetPassword one_user={_pstate.dataOne.user_account}/>
+                <WrappedFormEditEmployeeProfile one_user={_pstate.dataOne} allDepartments={_pstate.allDepartments}/>
+            </div>
+            break;
+        case _childPages.createNew:
+            _pageContent = <div>
+                <div>
+                    <Button type="primary" className="btn_backTOLanding" onClick={props.backAllBtnOnclick}>
+                        <Icon type="left"/>
+                        <span>返回</span>
+                    </Button>
+                </div>
+                <WrappedFormNewEmployeeProfile allDepartments={_pstate.allDepartments}/>
             </div>
             break;
         default:
@@ -276,18 +331,41 @@ const PageContent = (props) => {
     }
     return _pageContent;
 }
-export default class SubPageMyInfo extends React.Component {
+export default class SubPageEmployeeProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
-            breadcrumb: '我的页面',
-            childPage: _childPages.viewDetail,
+            breadcrumb: '员工档案',
+            childPage: _childPages.all,
             dataList: [],
-            dataOne: null
+            dataOne: null,
+            allDepartments:[]
         }
 
-        serviceUser.getUserFullInfoByUsername(localStorage.getItem('user_name')).then(data => {
+        serviceUser.getUserListForAdmin().then(data => {
+            if (data != null) {
+                this.setState({
+                    dataList: data,
+                    loading: false,
+                })
+            }
+        });
+
+        serviceUser.getAllUserDepartment().then(data=>{
+            if(data!=null){
+                this.setState({
+                    allDepartments: data,
+                })
+            }
+        });
+    }
+
+    updateDataOne=(user_name)=>{
+        this.setState({
+            loading: true
+        });
+        serviceUser.getUserFullInfoByUsername(user_name).then(data => {
             if (data != null) {
                 this.setState({
                     dataOne: data,
@@ -295,22 +373,57 @@ export default class SubPageMyInfo extends React.Component {
                 })
             }
         });
-
-    }
-
-    handleCheckDetailOnclick = (e) => {
-        this.setState({
-            childPage: _childPages.viewDetail
-        });
     }
 
     handleBackViewDetailBtnOnclick = (e) => {
         this.setState({
-            childPage: _childPages.viewDetail
+            childPage: _childPages.viewDetail,
         });
+        this.updateDataOne(this.state.dataOne.user_account.user_name)
     }
 
     updatePasswordBtnOnclick = () => {
+        this.setState({
+            childPage: _childPages.edit
+        });
+    }
+
+    handleAddNewBtnOnclick=()=>{
+        this.setState({
+            childPage: _childPages.createNew
+        });
+    }
+
+    handleReloadBtnOnclick=()=>{
+        this.setState({
+            loading: true
+        });
+        serviceUser.getUserListForAdmin().then(data => {
+            if (data != null) {
+                this.setState({
+                    dataList: data,
+                    loading: false,
+                })
+            }
+        });
+    }
+
+    handleCheckDetailOnclick = (e) => {
+        const user_name=e.target.attributes.user_name.value;
+
+        this.setState({
+            childPage: _childPages.viewDetail
+        });
+        this.updateDataOne(user_name)
+    }
+
+    handleBackAllBtnOnclick=()=>{
+        this.setState({
+            childPage: _childPages.all
+        });
+    }
+
+    handleEditOneBtnOclick=()=>{
         this.setState({
             childPage: _childPages.edit
         });
@@ -320,7 +433,11 @@ export default class SubPageMyInfo extends React.Component {
         return (<PageContent
             _pstate={this.state}
             backLandingButtonClick={this.props.backLandingButtonClick}
+            addNewBtnOnclick={this.handleAddNewBtnOnclick}
+            reloadBtnOnclick={this.handleReloadBtnOnclick}
             checkDetailOnclick={this.handleCheckDetailOnclick}
+            backAllBtnOnclick={this.handleBackAllBtnOnclick}
+            editOneBtnOclick={this.handleEditOneBtnOclick}
             backViewDetailBtnOnclick={this.handleBackViewDetailBtnOnclick}
             updatePasswordBtnOnclick={this.updatePasswordBtnOnclick}
         />);

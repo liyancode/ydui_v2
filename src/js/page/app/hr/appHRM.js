@@ -4,6 +4,7 @@ import _globalConstrants from "../../../util/_globalConstrants"
 import _globalUtil from "../../../util/_globalUtil";
 
 import SubPageMyInfo from "./subMyInfo/subMyInfo";
+import SubPageEmployeeProfile from "./subPageEmployeeProfile/subPageEmployeeProfile"
 import SubPageRulesAndRegulations from "./subPageRulesAndRegulations/subPageRulesAndRegulations";
 
 const {Content,} = Layout;
@@ -35,15 +36,15 @@ const PageContent = (props) => {
                             <Icon style={{fontSize:36}} type={"user"}/>
                             <span style={{display:"block",marginLeft:0}}>{_subConstrants.myInfo.cn}</span>
                         </Button>
-                        <Button style={_styles.styleFLogo} module={_subConstrants.officeSupplies.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"desktop"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.officeSupplies.cn}</span>
-                        </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.employeeProfile.en}
                                 onClick={props.moduleButtonClick}>
                             <Icon style={{fontSize:36}} type={"solution"}/>
                             <span style={{display:"block",marginLeft:0}}>{_subConstrants.employeeProfile.cn}</span>
+                        </Button>
+                        <Button style={_styles.styleFLogo} module={_subConstrants.officeSupplies.en}
+                                onClick={props.moduleButtonClick}>
+                            <Icon style={{fontSize:36}} type={"desktop"}/>
+                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.officeSupplies.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.pto.en}
                                 onClick={props.moduleButtonClick}>
@@ -113,13 +114,7 @@ const PageContent = (props) => {
             </div>
             break;
         case _subConstrants.employeeProfile.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.employeeProfile.cn}
-            </div>
+            _pageContent = <SubPageEmployeeProfile backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.pto.en:
             _pageContent = <div>
@@ -230,7 +225,7 @@ export default class AppHR extends React.Component {
             <div>
                 <div className="page-header">
                     <h4 style={{display: "inline"}}>
-                        <Icon type="global"/>
+                        <Icon type="user"/>
                         <span>{this.state.breadcrumbLanding}</span>
                     </h4>
                     <Breadcrumb style={{display: "inline"}}>

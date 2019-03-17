@@ -7,6 +7,7 @@ const _globalUtil = {
     _setSearchSub,
     _generateBarcode,
     _saveHtmlToPDFFile,
+    _format_time_string_by_day,
 }
 export default _globalUtil
 function _pathnameToMenukey() {
@@ -76,4 +77,12 @@ function _saveHtmlToPDFFile(elementId,fileName){
 
     // New Promise-based usage:
     html2pdf().set(opt).from(input).save();
+}
+
+function _format_time_string_by_day(timeStr){
+    let splitStr=' ';
+    if(timeStr.indexOf('T')>0){
+        splitStr="T"
+    }
+    return timeStr.split('+')[0].replace(/(^\s*)|(\s*$)/g, "").split(splitStr)[0];
 }

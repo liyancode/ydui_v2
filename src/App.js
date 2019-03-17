@@ -12,6 +12,7 @@ import CompSider from "./js/page/component/compSider"
 import CompFooter from "./js/page/component/compFooter"
 import CompNotLogin from "./js/page/component/compNotLogin"
 import {PrivateRoute} from "./PrivateRoute";
+
 import AppHome from "./js/page/app/home/appHome"
 import AppHR from "./js/page/app/hr/appHRM"
 import AppDesignM from "./js/page/app/designm/appDesignM"
@@ -21,7 +22,6 @@ import AppProduceM from "./js/page/app/producem/appProduceM"
 import AppPurchaseM from "./js/page/app/purchasem/appPurchaseM"
 import AppSystemM from "./js/page/app/systemm/appSystemM"
 import AppWarehouseM from "./js/page/app/warehouse/appWarehouseM"
-
 
 const P404 = () => <h2>404</h2>;
 const NotLogin = () => <div>
