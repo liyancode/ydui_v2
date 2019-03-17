@@ -29,72 +29,78 @@ const PageContent = (props) => {
         case _globalConstrants._pages.landingPage:
             _pageContent = <div>
                 <Divider orientation="left">办公人事管理</Divider>
-                <Row gutter={ {xs: 8, sm: 16, md: 24, lg: 32} }>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.myInfo.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"user"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.myInfo.cn}</span>
+                            <Icon style={{fontSize: 36}} type={"user"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.myInfo.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.employeeProfile.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"solution"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.employeeProfile.cn}</span>
+                            <Icon style={{fontSize: 36}} type={"solution"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.employeeProfile.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.officeSupplies.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"desktop"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.officeSupplies.cn}</span>
+                                onClick={props.moduleButtonClick}
+                                disabled={true} title={"开发中..."}
+                        >
+                            <Icon style={{fontSize: 36}} type={"desktop"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.officeSupplies.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.pto.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"schedule"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.pto.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"schedule"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.pto.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.reimbursement.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"property-safety"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.reimbursement.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"property-safety"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.reimbursement.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.resignationLetter.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"user-delete"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.resignationLetter.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"user-delete"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.resignationLetter.cn}</span>
                         </Button>
                     </Col>
                 </Row>
                 <Divider orientation="left">信息通讯管理</Divider>
-                <Row gutter={ {xs: 8, sm: 16, md: 24, lg: 32} }>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.announcement.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"notification"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.announcement.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"notification"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.announcement.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.rulesAndRegulations.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"read"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.rulesAndRegulations.cn}</span>
+                            <Icon style={{fontSize: 36}} type={"read"}/>
+                            <span
+                                style={{display: "block", marginLeft: 0}}>{_subConstrants.rulesAndRegulations.cn}</span>
                         </Button>
                     </Col>
                 </Row>
                 <Divider orientation="left">资料档案管理</Divider>
-                <Row gutter={ {xs: 8, sm: 16, md: 24, lg: 32} }>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.electronicData.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"usb"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.electronicData.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"usb"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.electronicData.cn}</span>
                         </Button>
                     </Col>
                 </Row>
                 <Divider orientation="left">员工考核管理</Divider>
-                <Row gutter={ {xs: 8, sm: 16, md: 24, lg: 32} }>
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.performanceAppraisal.en}
-                                onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize:36}} type={"trophy"}/>
-                            <span style={{display:"block",marginLeft:0}}>{_subConstrants.performanceAppraisal.cn}</span>
+                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
+                            <Icon style={{fontSize: 36}} type={"trophy"}/>
+                            <span style={{
+                                display: "block",
+                                marginLeft: 0
+                            }}>{_subConstrants.performanceAppraisal.cn}</span>
                         </Button>
                     </Col>
                 </Row>
@@ -185,8 +191,8 @@ export default class AppHR extends React.Component {
         const _sub = _globalUtil._getSearchSub()
         this.state = {
             loading: false,
-            breadcrumbLanding:"人力资源",
-            breadcrumb: _subConstrants[_sub]?_subConstrants[_sub].cn:'',
+            breadcrumbLanding: "人力资源",
+            breadcrumb: _subConstrants[_sub] ? _subConstrants[_sub].cn : '',
             sub: _sub ? _sub : _globalConstrants._pages.landingPage,
             childPage: _childPages.all,
         }
@@ -205,7 +211,7 @@ export default class AppHR extends React.Component {
             this.setState({
                 loading: false,
                 sub: subModule.value,
-                breadcrumb:_subConstrants[subModule.value].cn
+                breadcrumb: _subConstrants[subModule.value].cn
             });
         } else {
             alert("未知页面！")
@@ -216,7 +222,7 @@ export default class AppHR extends React.Component {
         _globalUtil._setSearchSub(_globalConstrants._pages.landingPage)
         this.setState({
             sub: _globalConstrants._pages.landingPage,
-            breadcrumb:"所有"
+            breadcrumb: "所有"
         });
     }
 
