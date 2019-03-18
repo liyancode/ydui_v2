@@ -33,8 +33,8 @@ const PageContent = (props) => {
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.myInfo.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize: 36}} type={"user"}/>
-                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.myInfo.cn}</span>
+                            <Icon style={{fontSize: 36,color:'#5cc05c'}} type={"user"}/>
+                            <span style={{display: "block", marginLeft: 0,color:'#3C444D'}}>{_subConstrants.myInfo.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.employeeProfile.en}
                                 onClick={props.moduleButtonClick}>
