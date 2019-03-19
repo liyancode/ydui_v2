@@ -6,6 +6,7 @@ import _globalUtil from "../../../util/_globalUtil";
 import SubPageMyInfo from "./subMyInfo/subMyInfo";
 import SubPageEmployeeProfile from "./subPageEmployeeProfile/subPageEmployeeProfile"
 import SubPageRulesAndRegulations from "./subPageRulesAndRegulations/subPageRulesAndRegulations";
+import SubPageUserApplication from "./subPagePTO/subPageUserApplication";
 
 const {Content,} = Layout;
 const TabPane = Tabs.TabPane;
@@ -24,6 +25,7 @@ const PageContent = (props) => {
         {_globalConstrants._pages.errorPage}
     </div>
 
+    const buttonIconStyle={fontSize: 36,color:'#5cc05c'}
     //which page?
     switch (props.sub) {
         case _globalConstrants._pages.landingPage:
@@ -33,34 +35,33 @@ const PageContent = (props) => {
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.myInfo.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize: 36,color:'#5cc05c'}} type={"user"}/>
-                            <span style={{display: "block", marginLeft: 0,color:'#3C444D'}}>{_subConstrants.myInfo.cn}</span>
+                            <Icon style={buttonIconStyle} type={"user"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.myInfo.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.employeeProfile.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize: 36}} type={"solution"}/>
+                            <Icon style={buttonIconStyle} type={"solution"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.employeeProfile.cn}</span>
+                        </Button>
+                        <Button style={_styles.styleFLogo} module={_subConstrants.pto.en}
+                                onClick={props.moduleButtonClick}>
+                            <Icon style={buttonIconStyle} type={"schedule"}/>
+                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.pto.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.officeSupplies.en}
                                 onClick={props.moduleButtonClick}
-                                disabled={true} title={"开发中..."}
                         >
-                            <Icon style={{fontSize: 36}} type={"desktop"}/>
+                            <Icon style={buttonIconStyle} type={"desktop"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.officeSupplies.cn}</span>
-                        </Button>
-                        <Button style={_styles.styleFLogo} module={_subConstrants.pto.en}
-                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"schedule"}/>
-                            <span style={{display: "block", marginLeft: 0}}>{_subConstrants.pto.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.reimbursement.en}
                                 onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"property-safety"}/>
+                            <Icon style={buttonIconStyle} type={"property-safety"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.reimbursement.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.resignationLetter.en}
-                                onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"user-delete"}/>
+                                onClick={props.moduleButtonClick}>
+                            <Icon style={buttonIconStyle} type={"user-delete"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.resignationLetter.cn}</span>
                         </Button>
                     </Col>
@@ -70,12 +71,12 @@ const PageContent = (props) => {
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.announcement.en}
                                 onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"notification"}/>
+                            <Icon style={buttonIconStyle} type={"notification"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.announcement.cn}</span>
                         </Button>
                         <Button style={_styles.styleFLogo} module={_subConstrants.rulesAndRegulations.en}
                                 onClick={props.moduleButtonClick}>
-                            <Icon style={{fontSize: 36}} type={"read"}/>
+                            <Icon style={buttonIconStyle} type={"read"}/>
                             <span
                                 style={{display: "block", marginLeft: 0}}>{_subConstrants.rulesAndRegulations.cn}</span>
                         </Button>
@@ -86,7 +87,7 @@ const PageContent = (props) => {
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.electronicData.en}
                                 onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"usb"}/>
+                            <Icon style={buttonIconStyle} type={"usb"}/>
                             <span style={{display: "block", marginLeft: 0}}>{_subConstrants.electronicData.cn}</span>
                         </Button>
                     </Col>
@@ -96,7 +97,7 @@ const PageContent = (props) => {
                     <Col className="gutter-row">
                         <Button style={_styles.styleFLogo} module={_subConstrants.performanceAppraisal.en}
                                 onClick={props.moduleButtonClick} disabled={true} title={"开发中..."}>
-                            <Icon style={{fontSize: 36}} type={"trophy"}/>
+                            <Icon style={buttonIconStyle} type={"trophy"}/>
                             <span style={{
                                 display: "block",
                                 marginLeft: 0
@@ -111,25 +112,15 @@ const PageContent = (props) => {
                 <SubPageMyInfo backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.officeSupplies.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.officeSupplies.cn}
-            </div>
+            _pageContent = <SubPageUserApplication backLandingButtonClick={props.backLandingButtonClick}
+                                                   userApplicationType={'office_supplies'}/>
             break;
         case _subConstrants.employeeProfile.en:
             _pageContent = <SubPageEmployeeProfile backLandingButtonClick={props.backLandingButtonClick}/>
             break;
         case _subConstrants.pto.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.pto.cn}
-            </div>
+            _pageContent = <SubPageUserApplication backLandingButtonClick={props.backLandingButtonClick}
+                                                   userApplicationType={'leave'}/>
             break;
         case _subConstrants.reimbursement.en:
             _pageContent = <div>
@@ -141,13 +132,8 @@ const PageContent = (props) => {
             </div>
             break;
         case _subConstrants.resignationLetter.en:
-            _pageContent = <div>
-                <Button type="primary" className="btn_backTOLanding" onClick={props.backLandingButtonClick}>
-                    <Icon type="left"/>
-                    <span>返回</span>
-                </Button>
-                {_subConstrants.resignationLetter.cn}
-            </div>
+            _pageContent = <SubPageUserApplication backLandingButtonClick={props.backLandingButtonClick}
+                                                   userApplicationType={'resignation'}/>
             break;
         case _subConstrants.announcement.en: //对账
             _pageContent = <div>

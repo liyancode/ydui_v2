@@ -42,6 +42,7 @@ export const serviceUser = {
     updateUserApplication,
     getUserApplicationByApplicationId,
     getUserApplicationListByUsername,
+    getUserApplicationListByUsernameAndType,
     getUserApplicationListByApproveBy,
 
     //list
@@ -204,6 +205,10 @@ function getUserApplicationByApplicationId(key) {
 
 function getUserApplicationListByUsername(key) {
     return service_Util_.common_Get_(apiPrefix + `/user_application/list/by_user_name/`, key).then(handleResponse);
+}
+
+function getUserApplicationListByUsernameAndType(userName,type) {
+    return service_Util_.common_Get_(apiPrefix + `/user_application/list/by_user_name_and_type/`+userName+"?type="+type, '').then(handleResponse);
 }
 
 function getUserApplicationListByApproveBy(key) {
