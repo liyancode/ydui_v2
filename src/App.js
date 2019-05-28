@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Layout,} from 'antd';
 import history from "./js/util/_globalHistory"
 import _globalUtil from "./js/util/_globalUtil"
+import _globalConfig from "./js/util/_globalConfig"
 import {service_Util_} from "../src/js/service/serviceUtil"
 import {tokenExpired} from "./js/service/tokenExpired";
 
@@ -14,14 +15,6 @@ import CompNotLogin from "./js/page/component/compNotLogin"
 import {PrivateRoute} from "./PrivateRoute";
 
 import AppHome from "./js/page/app/home/appHome"
-import AppHR from "./js/page/app/hr/appHRM"
-import AppDesignM from "./js/page/app/designm/appDesignM"
-import AppFinanceM from "./js/page/app/financem/appFinanceM"
-import AppMarketM from "./js/page/app/marketm/appMarketM"
-import AppProduceM from "./js/page/app/producem/appProduceM"
-import AppPurchaseM from "./js/page/app/purchasem/appPurchaseM"
-import AppSystemM from "./js/page/app/systemm/appSystemM"
-import AppWarehouseM from "./js/page/app/warehouse/appWarehouseM"
 
 const P404 = () => <h2>404</h2>;
 const NotLogin = () => <div>
@@ -36,9 +29,9 @@ function handleSiderLinkClick(e) {
     history.push(e.target.pathname)
 }
 
-window.addEventListener('popstate', function() {
+window.addEventListener('popstate', function () {
     console.log("back")
-},false);
+}, false);
 export default class AppRouter extends React.Component {
     constructor(props) {
         super(props);
@@ -53,11 +46,11 @@ export default class AppRouter extends React.Component {
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // 设置定时器并赋值给 timer
-        if(window.location.pathname.indexOf('/login')!==0){
-            setInterval(function(){
-                service_Util_.heart_beat().then(response=>{
+        if (window.location.pathname.indexOf('/login') !== 0) {
+            setInterval(function () {
+                service_Util_.heart_beat().then(response => {
                     if (!response.ok) {
                         tokenExpired();
                         return null;
@@ -65,39 +58,52 @@ export default class AppRouter extends React.Component {
                         console.log("ok")
                     }
                 })
-            },60000*5)
-        }else{
+            }, 60000 * 5)
+        } else {
             console.log("login page")
         }
     }
 
+    authorizedPrivateRoutes = () => {
+        const authorityHash = JSON.parse(localStorage.getItem('user')).authorityHash
+        let appPrivateRoutes = [], authoritizedComponent = []
+        let kv, path
+        for (var k in authorityHash) {
+            if (authorityHash[k] !== 'n') {
+                kv = _globalConfig._authorityComponents[k]
+                if (_globalUtil._notNullNorUndefined(kv)) {
+                    path = "/" + kv.key + "/"
+                    appPrivateRoutes.push(<PrivateRoute path={path} component={kv.component} key={kv.key}/>)
+                    authoritizedComponent.push(kv)
+                }
+            }
+        }
+
+        return [appPrivateRoutes,authoritizedComponent]
+    }
+
     render() {
-        let defaultSelectedKeys=[_globalUtil._pathnameToMenukey()]
+        let defaultSelectedKeys = [_globalUtil._pathnameToMenukey()]
         console.log(defaultSelectedKeys)
-        if(window.location.pathname.indexOf('/login')===0){
+        if (window.location.pathname.indexOf('/login') === 0) {
             return (<Router><LoginPage/></Router>)
-        }else{
+        } else {
+            const tpV=this.authorizedPrivateRoutes();
             return (<Router>
-                <Layout style={{minHeight:"100%"}}>
+                <Layout style={{minHeight: "100%"}}>
                     <CompHeader collapsed={this.state.collapsed} toggle={this.toggle}/>
-                    <Layout style={{marginTop:64}}>
+                    <Layout style={{marginTop: 64}}>
                         <CompSider
                             collapsed={this.state.collapsed}
                             defaultMenuKey={defaultSelectedKeys}
                             siderLinkClick={handleSiderLinkClick}
+                            authoritizedComponents={tpV[1]}
                         />
-                        <Layout style={{ padding: '0 24px 24px' }}>
+                        <Layout style={{padding: '0 24px 24px'}}>
                             <Switch>
                                 <PrivateRoute path="/" exact component={AppHome}/>
                                 <PrivateRoute path="/home/" component={AppHome}/>
-                                <PrivateRoute path="/appHR/" component={AppHR}/>
-                                <PrivateRoute path="/appDesignM/" component={AppDesignM}/>
-                                <PrivateRoute path="/appFinanceM/" component={AppFinanceM}/>
-                                <PrivateRoute path="/appMarketM/" component={AppMarketM}/>
-                                <PrivateRoute path="/appProduceM/" component={AppProduceM}/>
-                                <PrivateRoute path="/appPurchaseM/" component={AppPurchaseM}/>
-                                <PrivateRoute path="/appSystemM/" component={AppSystemM}/>
-                                <PrivateRoute path="/appWarehouseM/" component={AppWarehouseM}/>
+                                {tpV[0]}
                                 <Route path="/notLogin" component={CompNotLogin}/>
                                 <Route component={P404}/>
                             </Switch>

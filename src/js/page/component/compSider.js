@@ -10,6 +10,19 @@ export default class CompSider extends React.Component {
     }
 
     render() {
+        const authoritizedComponents=this.props.authoritizedComponents
+        let menuList=[],comI
+        for(let i in authoritizedComponents){
+            comI=authoritizedComponents[i]
+            menuList.push(
+                <Menu.Item key={comI.key}>
+                    <Link to={'/'+comI.key+'/'} replace onClick={this.props.siderLinkClick}>
+                        <Icon type={comI.iconType}/>
+                        <span>{comI.cn}</span>
+                    </Link>
+                </Menu.Item>
+            )
+        }
         if (window.location.pathname.indexOf('/notLogin') === 0) {
             return null;
         } else {
@@ -37,54 +50,7 @@ export default class CompSider extends React.Component {
                                 <span>首页</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="appHR">
-                            <Link to='/appHR/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="user"/>
-                                <span>人力资源</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appMarketM">
-                            <Link to='/appMarketM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="global" />
-                                <span>销售管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appDesignM">
-                            <Link to='/appDesignM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="experiment" />
-                                <span>设计管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appPurchaseM">
-                            <Link to='/appPurchaseM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="shopping" />
-                                <span>采购管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appWarehouseM">
-                            <Link to='/appWarehouseM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="database"/>
-                                <span>仓库管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appProduceM">
-                            <Link to='/appProduceM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="fire" />
-                                <span>生产管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appFinanceM">
-                            <Link to='/appFinanceM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="property-safety" />
-                                <span>财务管理</span>
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="appSystemM">
-                            <Link to='/appSystemM/' replace onClick={this.props.siderLinkClick}>
-                                <Icon type="setting" />
-                                <span>系统管理</span>
-                            </Link>
-                        </Menu.Item>
+                        {menuList}
                     </Menu>
                 </Sider>)
         }

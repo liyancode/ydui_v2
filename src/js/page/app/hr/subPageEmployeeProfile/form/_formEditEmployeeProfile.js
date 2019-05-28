@@ -237,11 +237,13 @@ class formEditEmployeeProfile extends React.Component {
             <Option key='admin' value='hr:rw,crm:rw,order:rw,fin:rw,product:rw,warehouse:rw'>超级管理员(最高权限)</Option>,
             <Option key='hr:r' value='hr:r'>员工档案(普通用户)</Option>,
             <Option key='hr:rw' value='hr:rw'>员工档案(管理员)</Option>,
-            <Option key='crm:rw' value='crm:rw'>客户管理</Option>,
-            <Option key='order:rw' value='order:rw'>订单管理</Option>,
-            <Option key='fin:rw' value='fin:rw'>财务审批</Option>,
-            <Option key='product:rw' value='product:rw'>产品管理</Option>,
-            <Option key='warehouse:rw' value='warehouse:rw'>库存管理</Option>,
+            <Option key='marketM:rw' value='marketM:rw'>销售管理</Option>,
+            <Option key='designM:rw' value='designM:rw'>设计管理</Option>,
+            <Option key='purchaseM:rw' value='purchaseM:rw'>采购管理</Option>,
+            <Option key='warehouseM:rw' value='warehouseM:rw'>仓库管理</Option>,
+            <Option key='produceM:rw' value='produceM:rw'>生产管理</Option>,
+            <Option key='financeM:rw' value='financeM:rw'>财务管理</Option>,
+            <Option key='systemM:rw' value='systemM:rw'>系统管理</Option>,
         ]
         const authoritySelector = getFieldDecorator('authorities', {
             rules: [{

@@ -2,6 +2,7 @@ import JsBarcode from 'jsbarcode'
 import html2pdf from 'html2pdf.js'
 
 const _globalUtil = {
+    _notNullNorUndefined,
     _pathnameToMenukey,
     _getSearchSub,
     _setSearchSub,
@@ -85,4 +86,8 @@ function _format_time_string_by_day(timeStr){
         splitStr="T"
     }
     return timeStr.split('+')[0].replace(/(^\s*)|(\s*$)/g, "").split(splitStr)[0];
+}
+
+function _notNullNorUndefined(obj) {
+    return !(obj==null||obj===undefined)
 }
