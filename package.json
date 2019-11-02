@@ -5,7 +5,7 @@
   "dependencies": {
     "antd": "^3.15.1",
     "babel-polyfill": "^6.26.0",
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.1",
     "canvas": "^2.3.1",
     "es6-promise": "^4.2.5",
     "history": "^4.7.2",
